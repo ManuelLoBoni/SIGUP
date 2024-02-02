@@ -1,0 +1,245 @@
+﻿
+@{
+    ViewBag.Title = "Carreras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Carreras</h2>
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="#">Administrador</a></li>
+    <li class="breadcrumb-item active">Carreras</li>
+</ol>
+<div class="card">
+    <div class="card-header">
+
+        <i class="fas fa-landmark me-1"></i>Lista de Carreras
+    </div>
+    <div class="card-body">
+        @*boostrap es como manejar una hoja en excel*@
+        <div class="row">
+            <div class="col-12  d-flex justify-content-between align-items-center">
+                @*numero de filas*@
+                <button type="button" class="btn btn-success" onclick="abrirModal()">Crear Nuevo</button>
+
+                <form action="@Url.Action("DescargarPDF_Prestamos","SIGUP")" class="mt-0 ml-2">
+                    <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                </form>
+            </div>
+        </div>
+        <hr /> @*el id es para identificar la tabla*@
+        <table id="tabla" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Nombre</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*Aqui va el render de ajax*@
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- Modal, con el id FormModal vamos a llamarlo cuando deseamos que aparezca y cuando no
+    al momento de precionar el boton nuevo-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    @*Esto ultimo de data-bs-backdrop es para*@
+    <div class="modal-dialog">
+        @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Prestamo</h5>
+                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="contenedor">
+                <input id="txtId" type="hidden" value="0" />
+            <div class="row g-2">
+
+                <div class="col-sm-12">
+                    <label class="form-label">Nombre de la Carrera</label>
+                    <input type="text" class="form-control" id="txtNombreCarrera" autocomplete="off" placeholder="Escribe el nombre de la carrera.">
+                </div>
+
+            </div>
+                <!--mensaje de alerta-->
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeError" class="alert alert-danger" role="alert">
+                            A simple danger alert—check it out!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" id="footer-modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarCarreraCU()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>*@
+<script>
+        //BIEN
+        var tabladata = $('#tabla');
+        var filaSeleccionada;
+
+        tabladata = $("#tabla").DataTable({
+            responsive: true,/*Para que sea resposiva*/
+            ordering: true,
+            "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
+                url: '@Url.Action("ListarCarrerasCU", "ControlAccesos")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "idCarrera" },
+                { "data": "nombreCarrera" },
+                {
+                    "data": "idCarrera", "render": function (data, type, row, meta) {
+
+                        return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
+                            $("<i>").addClass("fas fa-pen")
+                        ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML
+                            +
+                            $("<button>").addClass("btn btn-danger btn-eliminar btn-sm ms-2").append(
+                                $("<i>").addClass("fas fa-trash")
+                            ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML;
+
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "90px"
+                }
+            ],/*Propiedad o atributos van dentro de las comillas ""*/
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            }
+
+        });
+
+        //BTN Eliminar
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+            var json = $(this).data("informacion")
+                swal({
+                    title: "¿Esta Seguro?",
+                    text: "¿Desea eliminar la carrera?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-primary",
+                    confirmButtonText: "Si",
+                    cancelButtonText: "No",
+                    closeOnConfirm: true
+                },
+                function () {
+                    jQuery.ajax({
+                        url: '@Url.Action("EliminarCarreraCU", "ControlAccesos")',
+                        type: "POST",
+                        data: JSON.stringify({ id: json.idCarrera }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.resultado) {
+                                tabladata.ajax.reload();
+                            }else {
+                                swal("No se pudo eliminar", data.mensaje, "error")
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    });
+                });
+        })
+
+        //BTN Editar
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+            filaSeleccionada = $(this).closest("tr");
+            var data = tabladata.row(filaSeleccionada).data();
+
+            var json = $(this).data("informacion")
+            abrirModal(json)
+
+        })
+        //------------------------------------------MODAL-----------------------------------------------
+        function abrirModal(json) {
+
+            /*Asignacion de valores al abrir el modal*/
+            $("#txtId").val(0);
+            $("#txtNombreCarrera").val("");
+
+            $("#mensajeError").hide();
+
+            if (json != null) {
+                $("#txtId").val(json.idCarrera);
+                $("#txtDescripcion").val(json.nombreCarrera);
+
+            }
+
+            $("#FormModal").modal("show");
+        }
+
+        
+
+            function GuardarCarreraCU() {
+                var Carrera = {
+                    idCarrera: $("#txtId").val(),
+                    nombreCarrera: $("#txtNombreCarrera").val(),
+                }
+            jQuery.ajax({
+                url: '@Url.Action("GuardarCarreraCU", "ControlAccesos")',
+                type: "POST",
+                data: JSON.stringify({ carrera: Carrera }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    //CATEGORIA NUEVO
+                    if (Carrera.idCarrera == "0") { 
+                        if (data.resultado != 0) {
+                            Carrera.idCarrera = data.resultado;
+                            tabladata.row.add(Carrera).draw(false);
+                            $("#FormModal").modal("hide");
+                            tabladata.ajax.reload();
+                        } else {
+
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+                    }
+                    //CATEGORIA Editar
+                    else {
+                        if (data.resultado) {
+                            tabladata.ajax.reload();
+                            filaSeleccionada = null;
+                            $("#FormModal").modal("hide");
+
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+                    }
+                },
+                error: function (error) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#mensajeError").text("Error Ajax");
+                    $("#mensajeError").show();
+                },
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 24
+                    });
+                }
+            });
+
+        }
+
+</script>
+}

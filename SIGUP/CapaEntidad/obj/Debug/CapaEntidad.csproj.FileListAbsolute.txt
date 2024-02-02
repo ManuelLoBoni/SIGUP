@@ -1,0 +1,30 @@
+D:\SistemaUnidadPracticas\SistemaWeb_UnidadPracticas\CapaEntidad\bin\Debug\CapaEntidad.dll
+D:\SistemaUnidadPracticas\SistemaWeb_UnidadPracticas\CapaEntidad\bin\Debug\CapaEntidad.pdb
+D:\SistemaUnidadPracticas\SistemaWeb_UnidadPracticas\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
+D:\SistemaUnidadPracticas\SistemaWeb_UnidadPracticas\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
+D:\SistemaUnidadPracticas\SistemaWeb_UnidadPracticas\CapaEntidad\obj\Debug\CapaEntidad.dll
+D:\SistemaUnidadPracticas\SistemaWeb_UnidadPracticas\CapaEntidad\obj\Debug\CapaEntidad.pdb
+C:\Users\eljho\source\repos\SIGUP\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.dll
+C:\Users\eljho\source\repos\SIGUP\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.pdb
+C:\Users\eljho\source\repos\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
+C:\Users\eljho\source\repos\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
+C:\Users\eljho\source\repos\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.dll
+C:\Users\eljho\source\repos\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.pdb
+C:\Users\eljho\OneDrive\Documentos\GitHub\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.dll
+C:\Users\eljho\OneDrive\Documentos\GitHub\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.pdb
+C:\Users\eljho\OneDrive\Documentos\GitHub\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
+C:\Users\eljho\OneDrive\Documentos\GitHub\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
+C:\Users\eljho\OneDrive\Documentos\GitHub\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.dll
+C:\Users\eljho\OneDrive\Documentos\GitHub\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.pdb
+C:\Users\david\OneDrive\Documents\Proyectos Programacion\SIGUP\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.dll
+C:\Users\david\OneDrive\Documents\Proyectos Programacion\SIGUP\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.pdb
+C:\Users\david\OneDrive\Documents\Proyectos Programacion\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
+C:\Users\david\OneDrive\Documents\Proyectos Programacion\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
+C:\Users\david\OneDrive\Documents\Proyectos Programacion\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.dll
+C:\Users\david\OneDrive\Documents\Proyectos Programacion\SIGUP\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.pdb
+C:\Users\lopez\ArchData\ProyectoFinalTEC\True\n\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.dll
+C:\Users\lopez\ArchData\ProyectoFinalTEC\True\n\SIGUP\CapaEntidad\bin\Debug\CapaEntidad.pdb
+C:\Users\lopez\ArchData\ProyectoFinalTEC\True\n\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
+C:\Users\lopez\ArchData\ProyectoFinalTEC\True\n\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
+C:\Users\lopez\ArchData\ProyectoFinalTEC\True\n\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.dll
+C:\Users\lopez\ArchData\ProyectoFinalTEC\True\n\SIGUP\CapaEntidad\obj\Debug\CapaEntidad.pdb
