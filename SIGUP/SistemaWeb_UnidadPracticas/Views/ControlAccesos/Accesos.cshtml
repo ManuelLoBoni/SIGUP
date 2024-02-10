@@ -29,7 +29,7 @@
         <table id="tabla" class="display cell-border" style="width:100%">
             <thead>
                 <tr>
-                    <th>#ID</th>
+                    <th>Estado</th>
                     <th>Fecha</th>
                     <th>Usuario</th>
                     <th>Hora de Entrada</th>
@@ -66,48 +66,48 @@
 
                 <input id="txtId" type="hidden" value="0" />@*Con el valor 0 se identifica si es un Prestamo nuevo a ingresar o es valor ya existe
                     pero si es diferente a 0 significa que ya existe y vamos a editar*@
-            <div class="row g-2">
-                <div class="col-sm-6">
-                    <label class="form-label">Fecha</label>
-                    <input type="date" class="form-control" id="txtFechaCU" autocomplete="off">
+                <div class="row g-2">
+                    <div class="col-sm-6">
+                        <label class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="txtFechaCU" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Usuario</label>
+                        <select id="cmbUsuario" class="form-select">
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Hora de Entrada</label>
+                        <input type="time" class="form-control" id="txtEntrada" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Hora de Salida</label>
+                        <input type="time" class="form-control" id="txtSalida" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Tipo de Actividad</label>
+                        <select id="cmbActividad" class="form-select">
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Alumnos</label>
+                        <input type="number" class="form-control" id="txtCantidadCU" autocomplete="off">
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="form-label">Semestre</label>
+                        <input type="number" class="form-control" id="txtSemestreCU" autocomplete="off" min="1" max="12">
+                    </div>
+                    <div class="col-sm-10">
+                        <label class="form-label">Area</label>
+                        <select id="cmbArea" class="form-select">
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="form-label">Carrera</label>
+                        <select id="cmbCarrera" class="form-select">
+                        </select>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <label class="form-label">Usuario</label>
-                    <select id="cmbUsuario" class="form-select">
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <label class="form-label">Hora de Entrada</label>
-                    <input type="time" class="form-control" id="txtEntrada" autocomplete="off">
-                </div>
-                <div class="col-sm-6">
-                    <label class="form-label">Hora de Salida</label>
-                    <input type="time" class="form-control" id="txtSalida" autocomplete="off">
-                </div>
-                <div class="col-sm-6">
-                    <label class="form-label">Tipo de Actividad</label>
-                    <select id="cmbActividad" class="form-select">
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <label class="form-label">Alumnos</label>
-                    <input type="number" class="form-control" id="txtCantidadCU" autocomplete="off">
-                </div>
-                <div class="col-sm-2">
-                    <label class="form-label">Semestre</label>
-                    <input type="number" class="form-control" id="txtSemestreCU" autocomplete="off" min="1" max="12">
-                </div>
-                <div class="col-sm-10">
-                    <label class="form-label">Area</label>
-                    <select id="cmbArea" class="form-select">
-                    </select>
-                </div>
-                <div class="col-sm-12">
-                    <label class="form-label">Carrera</label>
-                    <select id="cmbCarrera" class="form-select">
-                    </select>
-                </div>
-            </div>
                 <!--mensaje de alerta-->
                 <div class="row mt-2">
                     <div class="col-12">
@@ -125,8 +125,64 @@
     </div>
 </div>
 
+<div class="modal fade" id="ModalUpdater" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    @*Esto ultimo de data-bs-backdrop es para*@
+    <div class="modal-dialog">
+        @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title fw-bold text-white" id="exampleModalLabel2">Actualizar Hora de Salida</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="contenedor2">
+                @*El g-2 significa que va a agrupar las columnas de 2 en 2*@
+
+                <input id="txtId2" type="hidden" value="0" />
+
+                <div class="row g-2">
+
+                    <div class="col-sm-6">
+                        <label class="form-label fw-bold">Fecha</label>
+                        <input type="text" class="form-control text-primary" id="txtFechaCUP" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label fw-bold">Usuario</label>
+                        <input type="text" class="form-control text-primary" id="txtUsuarioCUP" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label fw-bold">Hora de Entrada</label>
+                        <input type="text" class="form-control text-primary" id="txtHEntradaCUP" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="form-label fw-bold">Hora de Salida</label>
+                        <input type="time" class="form-control text-success" id="txtHSalidaCUP" autocomplete="off">
+                    </div>
+
+                </div>
+                <!--mensaje de alerta-->
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeError2" class="alert alert-danger" role="alert">
+                            A simple danger alert—check it out!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-white" id="footer-modal2">
+                <button type="button" class="btn btn-secondary fw-bold" id="btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="ActualizaSalida()" id="btnFinalizarPrestamo"><b>Finalizar Cambios</b></button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts{
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+
     <script>
         //Variables Globales
         var tabladata;
@@ -138,37 +194,60 @@
         //Aqui se encuentra el cuerpo de la tabla
         tabladata = $("#tabla").DataTable({
             responsive: true,
-            ordering: true,
+            ordering: false,
             "ajax": {
                 url: '@Url.Action("ListarAccesosCompleto", "ControlAccesos")',
                 type: "GET",
                 dataType: "json"
             },
             "columns": [
-                { "data": "IdRegistro" },
+                {
+                    "data": "HoraSalida", "render": function (data) {
+                        if (data == "") {/*Si el valor es verdadero*/
+                            return '<span class="badge bg-warning text-dark">En clase</span>';
+                        } else {
+                            return '<span class="badge bg-success text-white">Concluida</span>';
+                        }
+                    },
+                    "orderable": false,
+                    "searchable": false
+                },
                 { "data": "fecha" },
                 {
                     "data": "E_IdUsuario", "render": function (data) {
                         return data.NombreCompletoUsuario
                     }
                 },
-                { "data": "HoraEntrada" },
                 {
-                    "data": "HoraSalida", "render": function (data) {
-                        if (data == "") {/*Si el valor es verdadero*/
-                            return '<span class="badge bg-warning text-dark">En clase</span>';
+                    "data": "HoraEntrada",
+                    "render": function (data) {
+                        return moment(data, 'HH:mm:ss').format('HH:mm');
+                    },
+                    "className": "text-center"
+                },
+                {
+                    "data": "HoraSalida",
+                    "render": function (data) {
+                        if (data == "") {
+                            return "-----";
                         } else {
-                            return data;
+                            return moment(data, 'HH:mm:ss').format('HH:mm');
                         }
-                    }
+                    },
+                    "className": "text-center"
                 },
                 {
                     "data": "E_TipoActividad", "render": function (data) {
                         return data.NombreActividad
-                    }
+                    },
+                    "className": "text-center"
                 },
-                { "data": "CantidadAlumnos" },
-                { "data": "Semestre" },
+                {
+                    "data": "CantidadAlumnos",
+                    "className": "text-center" },
+                {
+                    "data": "Semestre",
+                    "className": "text-center" },
                 {
                     "data": "E_IdCarrera", "render": function (data) {
                         return data.nombreCarrera
@@ -184,7 +263,10 @@
 
                         return $("<button>").addClass("btn btn-warning btn-actualizar btn-sm").append(
                             $("<i>").addClass("fas fa-sync")
-                        ).attr({ "data-informacionRegistro": JSON.stringify(row) })[0].outerHTML;
+                        ).attr({
+                            "title": "Actualizar Hora Salida",
+                            "data-informacion": JSON.stringify(row)
+                        })[0].outerHTML
                     },
                     "orderable": false,
                     "searchable": false
@@ -210,7 +292,6 @@
             }
 
         });
-
         //----------------------------------------ComboBox-------------------------------------------------
         jQuery.ajax({
             url: '@Url.Action("ListarCarrerasCU","ControlAccesos")',
@@ -280,14 +361,14 @@
             /*Asignacion de valores al abrir el modal*/
             $("#txtId").val(0);
             $("#txtFechaCU").val(fechaActual);
-            $("#cmbUsuario").val("");
+            $("#cmbUsuario").val($("#cmbUsuario option:first").val());
             $("#txtEntrada").val(horaActual);
             $("#txtSalida").val("");
-            $("#cmbActividad").val("");
+            $("#cmbActividad").val($("#cmbActividad option:first").val());
             $("#txtCantidadCU").val(1);
             $("#txtSemestreCU").val(1);
-            $("#cmbCarrera").val("");
-            $("#txtAreaDeUso").val("");
+            $("#cmbCarrera").val($("#cmbCarrera option:first").val());
+            $("#cmbArea").val($("#cmbArea option:first").val());
 
             $("#mensajeError").hide();
             //La siguiente validacion es por que el modal sirve para guardar y editar, entonces al abrir trae la informacion dependiendo del boton.
@@ -307,14 +388,38 @@
             $("#FormModal").modal("show");
         }
 
+        function abrirModal2(json) /*json es el data del siguiente*/ {
+
+            $("#mensajeError2").hide();
+
+            if (json != null) {
+                $("#mensajeError2").hide();
+                $("#txtId2").val(json.IdRegistro);
+                $("#txtFechaCUP").val(json.fecha).attr({ "disabled": "disabled" });
+                $("#txtUsuarioCUP").val(json.E_IdUsuario.NombreCompletoUsuario).attr({ "disabled": "disabled" });
+                $("#txtHEntradaCUP").val(moment(json.HoraEntrada, 'HH:mm:ss').format('HH:mm')).attr({ "disabled": "disabled" });
+                $("#txtHSalidaCUP").val(json.HoraSalida); 
+                if (json.HoraSalida != "") {
+                    $("#txtHSalidaCUP").val(json.HoraSalida);
+                } else {
+                    $("#txtHSalidaCUP").val(horaActual);
+                }
+
+            }
+
+            $("#ModalUpdater").modal("show");
+        }
+
+        $("#tabla tbody").on("click", '.btn-actualizar', function () {
+            var json = $(this).data("informacion")
+            abrirModal2(json)
+        })
+
         /*--------------- Al dar clic en el boton de editar-------------------------------*/
 
         $("#tabla tbody").on("click", '.btn-editar', function () {
-            filaSeleccionada = $(this).closest("tr");
-            var data = tabladata.row(filaSeleccionada).data();
             var json = $(this).data("informacion")
             abrirModal(json)
-
         })
 
         /*--------------- Al dar clic en el boton de editar solo fecha prestamo y activo-------------------------------*/
@@ -329,33 +434,41 @@
                 confirmButtonClass: "btn-primary",
                 confirmButtonText: "Si",
                 cancelButtonText: "No",
-                closeOnConfirm: true
+                closeOnConfirm: false //ATENCION si este se pone en true puede que ya no sirva el mensaje de error o confirmación
             },
-            function () {
+            function (isConfirm) {
+            if (isConfirm) {
                 jQuery.ajax({
-                    url: '@Url.Action("EliminarrCU", "ControlAccesos")',
-                    type: "POST",
+                url: '@Url.Action("EliminarrCU", "ControlAccesos")',
+                type: "POST",
                     data: JSON.stringify({ id: json.IdRegistro }),
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        if (data.resultado) {
-                            tabladata.ajax.reload();
-                        }else {
-                            swal("No se pudo eliminar", data.mensaje, "error")
-                        }
-                    },
-                    error: function (error) {
-                        console.log(error)
-                    }
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
 
-                });
-            });
+                    if (data.resultado) {
+                        console.log("Entro")
+                        swal("¡Eliminado!", "El registro ha sido eliminado correctamente", "success")
+                        tabladata.ajax.reload()
+                    } else {
+                        console.log("Entro al error")
+                        swal("¡Error!", data.mensaje, "error")
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+
+             });
+            } else {
+               /* swal("Cancelled", "Your imaginary file is safe :)", "error");*/
+            }
+        });
         })
 
         function GuardarRCU() {
 
-            var Prestamo = {
+            var Registro = {
                 IdRegistro: $("#txtId").val(),
                 fecha: $("#txtFechaCU").val(),
                 E_IdUsuario: {
@@ -379,20 +492,19 @@
                     nombreArea: $("#cmbArea option:selected").text()
                 },
             }
-            console.log(Prestamo);
                 jQuery.ajax({
                 url: '@Url.Action("GuardarRCU", "ControlAccesos")',
                     type: "POST",
-                    data: JSON.stringify({ accesos: Prestamo }), // el accesos es el parametro del metodo del controlador, el otro es la variable
+                    data: JSON.stringify({ accesos: Registro }), // el accesos es el parametro del metodo del controlador, el otro es la variable
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     $(".modal-body").LoadingOverlay("hide");
                     //CATEGORIA NUEVO
-                    if (Prestamo.IdRegistro == "0") {
+                    if (Registro.IdRegistro == "0") {
                         if (data.resultado != 0) {
-                            Prestamo.IdRegistro = data.resultado;
-                            tabladata.row.add(Prestamo).draw(false);
+                            Registro.IdRegistro = data.resultado;
+                            tabladata.row.add(Registro).draw(false);
                             $("#FormModal").modal("hide");
                             tabladata.ajax.reload();
                         } else {
@@ -405,7 +517,6 @@
                     else {
                         if (data.resultado) {
                             tabladata.ajax.reload();
-                            filaSeleccionada = null;
                             $("#FormModal").modal("hide");
 
                         } else {
@@ -429,5 +540,42 @@
             });
 
         }
+
+        function ActualizaSalida() {
+
+        var HSalida = {
+            IdRegistro: $("#txtId2").val(),
+            HoraSalida: $("#txtHSalidaCUP").val(),
+        }
+            jQuery.ajax({
+            url: '@Url.Action("SalidaCU", "ControlAccesos")',
+                type: "POST",
+                data: JSON.stringify({ salida: HSalida }), // el salida es el parametro del metodo del controlador, el otro es la variable
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $(".modal-body").LoadingOverlay("hide");
+                if (data.resultado) {
+                    tabladata.ajax.reload();
+                    $("#ModalUpdater").modal("hide");
+                } else {
+                    $("#mensajeError2").text(data.mensaje);
+                    $("#mensajeError2").show();
+                }
+            },
+            error: function (error) {
+                $(".modal-body").LoadingOverlay("hide");
+                $("#mensajeError2").text("Error Ajax");
+                $("#mensajeError2").show();
+            },
+            beforeSend: function () {
+                $(".modal-body").LoadingOverlay("show", {
+                    imageResizeFactor: 2,
+                    text: "Cargando...",
+                    size: 24
+                });
+            }
+        });
+    }
     </script>
 }

@@ -199,6 +199,7 @@ CREATE PROCEDURE sp_RegistrarCU
     @IdUsuario varchar(50),
 	@fecha date,
     @HoraEntrada time,
+    @HoraSalida time,
     @TipoActividad int,
     @CantidadAlumnos int,
     @Semestre int,
@@ -212,8 +213,8 @@ BEGIN
 
 	SET @Resultado = 0
 	BEGIN
-		INSERT INTO ControlUsuario (IdUsuario,fecha, HoraEntrada, TipoActividad, CantidadAlumnos, Semestre, IdCarrera, Area)
-		VALUES (@IdUsuario,@fecha, @HoraEntrada, @TipoActividad, @CantidadAlumnos, @Semestre, @IdCarrera, @Area)
+		INSERT INTO ControlUsuario (IdUsuario,fecha, HoraEntrada,HoraSalida, TipoActividad, CantidadAlumnos, Semestre, IdCarrera, Area)
+		VALUES (@IdUsuario,@fecha, @HoraEntrada,@HoraSalida, @TipoActividad, @CantidadAlumnos, @Semestre, @IdCarrera, @Area)
         SET @Resultado = scope_identity()
 	END
 END
@@ -250,6 +251,29 @@ BEGIN
             Semestre = @Semestre,
             IdCarrera = @IdCarrera,
             Area = @Area
+        WHERE IdRegistro = @IdRegistro;
+		SET @Resultado = 1
+	END
+	ELSE
+		SET @Mensaje = 'El registro con la id solicitada no fue encontrado.'
+END
+GO
+
+CREATE PROCEDURE sp_SalidaCU
+(
+	@IdRegistro int,
+    @HoraSalida time,
+	@Mensaje varchar(500) output,
+	@Resultado int output
+)
+AS
+BEGIN
+	SET @Resultado = 0
+	IF EXISTS (SELECT * FROM ControlUsuario WHERE IdRegistro = @IdRegistro)
+    BEGIN
+        UPDATE ControlUsuario
+        SET
+            HoraSalida = @HoraSalida
         WHERE IdRegistro = @IdRegistro;
 		SET @Resultado = 1
 	END

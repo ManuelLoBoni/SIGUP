@@ -109,5 +109,22 @@ namespace CapaNegocio
                 return false;
             }
         }
+        public bool SalidaRCU(EN_ControlAccesos salidaCU, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+
+            if (string.IsNullOrEmpty(salidaCU.HoraSalida) || string.IsNullOrWhiteSpace(salidaCU.HoraSalida))
+            {
+                Mensaje = "Debes seleccionar una hora de salida.";
+            }
+            if (string.IsNullOrEmpty(Mensaje))
+            {
+                return objCD.SalidaRCU(salidaCU, out Mensaje);
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

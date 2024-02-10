@@ -77,6 +77,14 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@IdUsuario", registroCU.E_IdUsuario.idUsuario);
                     cmd.Parameters.AddWithValue("@fecha", registroCU.fecha);
                     cmd.Parameters.AddWithValue("@HoraEntrada", registroCU.HoraEntrada);
+                    if (registroCU.HoraSalida == null)
+                    {
+                        cmd.Parameters.AddWithValue("@HoraSalida", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@HoraSalida", registroCU.HoraSalida);
+                    }
                     cmd.Parameters.AddWithValue("@TipoActividad", registroCU.E_TipoActividad.IdActividad);
                     cmd.Parameters.AddWithValue("@CantidadAlumnos", registroCU.CantidadAlumnos);
                     cmd.Parameters.AddWithValue("@Semestre", registroCU.Semestre);
@@ -151,6 +159,36 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@Semestre", registroCU.Semestre);
                     cmd.Parameters.AddWithValue("@IdCarrera", registroCU.E_IdCarrera.idCarrera);
                     cmd.Parameters.AddWithValue("@Area", registroCU.E_IdArea.idArea);
+                    //Dos parametros de salida, un entero de resultaado y un string de mensaje
+                    cmd.Parameters.Add("@Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    resultado = Convert.ToBoolean(cmd.Parameters["@Resultado"].Value);
+                    Mensaje = cmd.Parameters["@Mensaje"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Mensaje = ex.Message;
+            }
+            return resultado;
+        }
+        public bool SalidaRCU(EN_ControlAccesos registroCU, out string Mensaje)
+        {
+            bool resultado = false;
+
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oConexion = new SqlConnection(BD_Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_SalidaCU", oConexion);
+                    cmd.Parameters.AddWithValue("@IdRegistro", registroCU.IdRegistro);
+                    cmd.Parameters.AddWithValue("@HoraSalida", registroCU.HoraSalida);
                     //Dos parametros de salida, un entero de resultaado y un string de mensaje
                     cmd.Parameters.Add("@Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("@Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;

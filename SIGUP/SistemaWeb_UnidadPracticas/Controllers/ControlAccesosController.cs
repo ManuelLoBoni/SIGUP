@@ -51,7 +51,16 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             }
 
             return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult SalidaCU(EN_ControlAccesos salida)
+        {
+            object resultado;
+            string mensaje = string.Empty;
 
+            resultado = new RN_ControlAccesos().SalidaRCU(salida, out mensaje);
+
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult EliminarrCU(int id)
@@ -62,7 +71,6 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             respuesta = new RN_ControlAccesos().EliminarRegistroCU(id, out mensaje);
 
             return Json(new { resultado = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
-
         }
 
 
