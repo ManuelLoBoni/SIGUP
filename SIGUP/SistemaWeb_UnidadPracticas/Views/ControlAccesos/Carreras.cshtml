@@ -10,73 +10,187 @@
     <li class="breadcrumb-item"><a href="#">Administrador</a></li>
     <li class="breadcrumb-item active">Carreras</li>
 </ol>
-<div class="card">
-    <div class="card-header">
-
-        <i class="fas fa-landmark me-1"></i>Lista de Carreras
+<nav class="sticky-top bg-light">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-carreras-tab" data-bs-toggle="tab" data-bs-target="#nav-carreras" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Carreras</button>
+        <button class="nav-link" id="nav-areas-tab" data-bs-toggle="tab" data-bs-target="#nav-areas" type="button" role="tab" aria-controls="nav-areas" aria-selected="false">Áreas</button>
+        <button class="nav-link" id="nav-edificios-tab" data-bs-toggle="tab" data-bs-target="#nav-edificios" type="button" role="tab" aria-controls="nav-edificios" aria-selected="false">Edificios</button>
+        <button class="nav-link" id="nav-actividades-tab" data-bs-toggle="tab" data-bs-target="#nav-actividades" type="button" role="tab" aria-controls="nav-actividades" aria-selected="false">Actividades</button>
     </div>
-    <div class="card-body">
-        @*boostrap es como manejar una hoja en excel*@
-        <div class="row">
-            <div class="col-12  d-flex justify-content-between align-items-center">
-                @*numero de filas*@
-                <button type="button" class="btn btn-success" onclick="abrirModal()">Crear Nuevo</button>
+</nav>
 
-                <form action="@Url.Action("DescargarPDF_Prestamos","SIGUP")" class="mt-0 ml-2">
-                    <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
-                </form>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-carreras" role="tabpanel" aria-labelledby="nav-carreras-tab">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-landmark me-1"></i>Lista de Carreras
+            </div>
+            <div class="card-body">
+                @*boostrap es como manejar una hoja en excel*@
+                <div class="row">
+                    <div class="col-12  d-flex justify-content-between align-items-center">
+                        @*numero de filas*@
+                        <button type="button" class="btn btn-success" onclick="abrirModal()">Crear Nuevo</button>
+
+                        <form action="@Url.Action("DescargarPDF_Prestamos","SIGUP")" class="mt-0 ml-2">
+                            <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                        </form>
+                    </div>
+                </div>
+                <hr /> @*el id es para identificar la tabla*@
+                <table id="tablaCarreras" class="display cell-border" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Carrera</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*Aqui va el render de ajax*@
+                    </tbody>
+                </table>
+
             </div>
         </div>
-        <hr /> @*el id es para identificar la tabla*@
-        <table id="tabla" class="display cell-border" style="width:100%">
-            <thead>
-                <tr>
-                    <th>#ID</th>
-                    <th>Nombre</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @*Aqui va el render de ajax*@
-            </tbody>
-        </table>
 
-    </div>
-</div>
+        <div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            @*Esto ultimo de data-bs-backdrop es para*@
+            <div class="modal-dialog">
+                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">Prestamo</h5>
+                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="contenedor">
+                        <input id="txtId" type="hidden" value="0" />
+                        <div class="row g-2">
 
-<!-- Modal, con el id FormModal vamos a llamarlo cuando deseamos que aparezca y cuando no
-    al momento de precionar el boton nuevo-->
-<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    @*Esto ultimo de data-bs-backdrop es para*@
-    <div class="modal-dialog">
-        @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Prestamo</h5>
-                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="contenedor">
-                <input id="txtId" type="hidden" value="0" />
-            <div class="row g-2">
+                            <div class="col-sm-12">
+                                <label class="form-label">Nombre de la Carrera</label>
+                                <input type="text" class="form-control" id="txtNombreCarrera" autocomplete="off" placeholder="Escribe el nombre de la carrera.">
+                            </div>
 
-                <div class="col-sm-12">
-                    <label class="form-label">Nombre de la Carrera</label>
-                    <input type="text" class="form-control" id="txtNombreCarrera" autocomplete="off" placeholder="Escribe el nombre de la carrera.">
-                </div>
-
-            </div>
-                <!--mensaje de alerta-->
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <div id="mensajeError" class="alert alert-danger" role="alert">
-                            A simple danger alert—check it out!
                         </div>
+                        <!--mensaje de alerta-->
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div id="mensajeError" class="alert alert-danger" role="alert">
+                                    A simple danger alert—check it out!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="footer-modal">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="GuardarCarreraCU()">Guardar</button>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" id="footer-modal">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="GuardarCarreraCU()">Guardar</button>
+        </div>
+    </div>
+
+    
+
+    @*                                          TABLA AREAS                                         *@
+
+    <div class="tab-pane fade" id="nav-areas" role="tabpanel" aria-labelledby="nav-areas-tab">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-landmark me-1"></i>Lista de Áreas
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12  d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-success" onclick="abrirModal()">Crear Nuevo</button>
+
+                        <form action="@Url.Action("DescargarPDF_Prestamos","SIGUP")" class="mt-0 ml-2">
+                            <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                        </form>
+                    </div>
+                </div>
+                <hr /> @*el id es para identificar la tabla*@
+                <table id="tablaAreas" class="display cell-border" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Área</th>
+                            <th>Edificio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*Aqui va el render de ajax*@
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    @*                                          TABLA EDIFICIOS                                         *@
+
+    <div class="tab-pane fade" id="nav-edificios" role="tabpanel" aria-labelledby="nav-edificios-tab">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-landmark me-1"></i>Lista de Áreas
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12  d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-success" onclick="abrirModal()">Crear Nuevo</button>
+
+                        <form action="@Url.Action("DescargarPDF_Prestamos","SIGUP")" class="mt-0 ml-2">
+                            <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                        </form>
+                    </div>
+                </div>
+                <hr /> @*el id es para identificar la tabla*@
+                <table id="tablaEdificios" class="display cell-border" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Edificio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*Aqui va el render de ajax*@
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    @*                                          TABLA ACTIVIDADES                                         *@
+
+    <div class="tab-pane fade" id="nav-actividades" role="tabpanel" aria-labelledby="nav-actividades-tab">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-landmark me-1"></i>Lista de Áreas
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12  d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-success" onclick="abrirModal()">Crear Nuevo</button>
+
+                        <form action="@Url.Action("DescargarPDF_Prestamos","SIGUP")" class="mt-0 ml-2">
+                            <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                        </form>
+                    </div>
+                </div>
+                <hr /> @*el id es para identificar la tabla*@
+                <table id="tablaActividades" class="display cell-border" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Actividad</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*Aqui va el render de ajax*@
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
@@ -86,10 +200,13 @@
     @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>*@
 <script>
         //BIEN
-        var tabladata = $('#tabla');
+        var tablaCarreras;
+    var tablaEdificios;
+    var tablaAreas;
+    var tablaActividades;
         var filaSeleccionada;
 
-        tabladata = $("#tabla").DataTable({
+        tablaCarreras = $("#tablaCarreras").DataTable({
             responsive: true,/*Para que sea resposiva*/
             ordering: true,
             "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
@@ -98,7 +215,6 @@
                 dataType: "json"
             },
             "columns": [
-                { "data": "idCarrera" },
                 { "data": "nombreCarrera" },
                 {
                     "data": "idCarrera", "render": function (data, type, row, meta) {
@@ -123,8 +239,112 @@
 
         });
 
+    tablaEdificios = $("#tablaEdificios").DataTable({
+            responsive: true,/*Para que sea resposiva*/
+            ordering: true,
+            "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
+                url: '@Url.Action("ListarEdificiosCU", "ControlAccesos")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "nombreEdificio" },
+                {
+                    "data": "idEdificio", "render": function (data, type, row, meta) {
+
+                        return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
+                            $("<i>").addClass("fas fa-pen")
+                        ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML
+                            +
+                            $("<button>").addClass("btn btn-danger btn-eliminar btn-sm ms-2").append(
+                                $("<i>").addClass("fas fa-trash")
+                            ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML;
+
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "90px"
+                }
+            ],/*Propiedad o atributos van dentro de las comillas ""*/
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            }
+
+    });
+
+    tablaAreas = $("#tablaAreas").DataTable({
+            responsive: true,/*Para que sea resposiva*/
+            ordering: true,
+            "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
+                url: '@Url.Action("ListarAreaCCU", "ControlAccesos")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "nombreArea" },
+                {
+                    "data": "e_edificio", "render": function (data) {
+                        return data.nombreEdificio
+                    }
+                },
+                {
+                    "data": "idArea", "render": function (data, type, row, meta) {
+
+                        return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
+                            $("<i>").addClass("fas fa-pen")
+                        ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML
+                            +
+                            $("<button>").addClass("btn btn-danger btn-eliminar btn-sm ms-2").append(
+                                $("<i>").addClass("fas fa-trash")
+                            ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML;
+
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "90px"
+                }
+            ],/*Propiedad o atributos van dentro de las comillas ""*/
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            }
+
+    });
+
+    tablaActividades = $("#tablaActividades").DataTable({
+            responsive: true,/*Para que sea resposiva*/
+            ordering: true,
+            "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
+                url: '@Url.Action("ListarActividadCU", "ControlAccesos")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "NombreActividad" },
+                {
+                    "data": "IdActividad", "render": function (data, type, row, meta) {
+
+                        return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
+                            $("<i>").addClass("fas fa-pen")
+                        ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML
+                            +
+                            $("<button>").addClass("btn btn-danger btn-eliminar btn-sm ms-2").append(
+                                $("<i>").addClass("fas fa-trash")
+                            ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML;
+
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "90px"
+                }
+            ],/*Propiedad o atributos van dentro de las comillas ""*/
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            }
+
+    });
+
         //BTN Eliminar
-        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+        $("#tablaCarreras tbody").on("click", '.btn-eliminar', function () {
             var json = $(this).data("informacion")
                 swal({
                     title: "¿Esta Seguro?",
@@ -134,7 +354,7 @@
                     confirmButtonClass: "btn-primary",
                     confirmButtonText: "Si",
                     cancelButtonText: "No",
-                    closeOnConfirm: true
+                    closeOnConfirm: false
                 },
                 function () {
                     jQuery.ajax({
@@ -158,9 +378,9 @@
         })
 
         //BTN Editar
-        $("#tabla tbody").on("click", '.btn-editar', function () {
+        $("#tablaCarreras tbody").on("click", '.btn-editar', function () {
             filaSeleccionada = $(this).closest("tr");
-            var data = tabladata.row(filaSeleccionada).data();
+            var data = tablaCarreras.row(filaSeleccionada).data();
 
             var json = $(this).data("informacion")
             abrirModal(json)
@@ -184,7 +404,7 @@
             $("#FormModal").modal("show");
         }
 
-        
+
 
             function GuardarCarreraCU() {
                 var Carrera = {
@@ -200,12 +420,12 @@
                 success: function (data) {
                     $(".modal-body").LoadingOverlay("hide");
                     //CATEGORIA NUEVO
-                    if (Carrera.idCarrera == "0") { 
+                    if (Carrera.idCarrera == "0") {
                         if (data.resultado != 0) {
                             Carrera.idCarrera = data.resultado;
-                            tabladata.row.add(Carrera).draw(false);
+                            tablaCarreras.row.add(Carrera).draw(false);
                             $("#FormModal").modal("hide");
-                            tabladata.ajax.reload();
+                            tablaCarreras.ajax.reload();
                         } else {
 
                             $("#mensajeError").text(data.mensaje);
@@ -215,7 +435,7 @@
                     //CATEGORIA Editar
                     else {
                         if (data.resultado) {
-                            tabladata.ajax.reload();
+                            tablaCarreras.ajax.reload();
                             filaSeleccionada = null;
                             $("#FormModal").modal("hide");
 

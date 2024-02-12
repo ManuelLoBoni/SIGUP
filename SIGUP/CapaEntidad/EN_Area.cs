@@ -10,6 +10,6 @@ namespace CapaEntidad
     {
         public int idArea { get; set; }
         public string nombreArea { get; set; }
-        public EN_Edificio edificio { get; set; }
+        public EN_Edificio e_edificio { get; set; }
     }
 }

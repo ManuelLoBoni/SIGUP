@@ -15,10 +15,6 @@ namespace CapaNegocio
         {
             return objBDC.ListarCarreras();
         }
-        public bool Eliminar(int id, out string Mensaje)
-        {
-            return objBDC.eliminar_carrera(id, out Mensaje);
-        }
         public int RegistrarCarrera(EN_Carrera carrera, out string Mensaje)
         {
             Mensaje = string.Empty;
@@ -52,6 +48,10 @@ namespace CapaNegocio
             {
                 return false;
             }
+        }
+        public bool Eliminar(int id, out string Mensaje)
+        {
+            return objBDC.eliminar_carrera(id, out Mensaje);
         }
     }
 }

@@ -5,15 +5,19 @@ GO
 CREATE PROCEDURE sp_RegistrarEdificio
 (
 	@NombreEdificio varchar(60),
-	@Resultado int output
+	@Resultado int output,
+	@Mensaje varchar(500) output
 )
 AS
 BEGIN
 	SET @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM Edificio WHERE NombreEdificio = @NombreEdificio)
 	BEGIN
 		INSERT INTO Edificio (NombreEdificio) VALUES (@NombreEdificio)
         SET @Resultado = scope_identity()
 	END
+	ELSE
+		SET @Mensaje = 'Ya existe un Edificio con ese nombre.'
 END
 GO
 
@@ -366,6 +370,68 @@ BEGIN
 END
 GO
 
+----------------------------------------------SP - Actividades------------------------------------------------
+CREATE PROCEDURE sp_RegistrarActividad
+(
+	@NombreActividad varchar(100),
+	@Resultado int output,
+	@Mensaje varchar(500) output
+)
+AS
+BEGIN
+	SET @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM TipoActividad WHERE NombreActividad = @NombreActividad)
+	BEGIN
+		INSERT INTO TipoActividad (NombreActividad) VALUES (@NombreActividad)
+        SET @Resultado = scope_identity()
+	END
+	ELSE
+		SET @Mensaje = 'Ya existe una Actividad con ese nombre.'
+END
+GO
+
+CREATE PROCEDURE sp_EditarActividad
+(
+	@IdActividad int,
+	@NombreActividad varchar(100),
+	@Mensaje varchar(500) output,
+	@Resultado int output
+)
+AS
+BEGIN
+	SET @Resultado = 0
+	IF EXISTS (SELECT * FROM TipoActividad WHERE IdActividad = @IdActividad)
+	BEGIN
+		UPDATE TipoActividad
+		SET
+		NombreActividad = @NombreActividad
+		WHERE IdActividad = @IdActividad
+		SET @Resultado = 1
+	END
+	ELSE
+	SET @Mensaje = 'La Actividad con la id solicitada no fue encontrado.'
+END
+GO
+
+CREATE PROCEDURE sp_EliminarActividad
+(
+	@IdActividad int,
+	@Mensaje varchar(500) output,
+	@Resultado int output
+)
+AS
+BEGIN
+	SET @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM TipoActividad TA INNER JOIN ControlUsuario CE 
+	ON TA.IdActividad = CE.TipoActividad WHERE CE.TipoActividad = @IdActividad)
+	BEGIN
+		DELETE FROM TipoActividad WHERE IdActividad = @IdActividad
+		SET @Resultado = 1
+	END
+	ELSE
+		SET @Mensaje = 'La Actividad a eliminar está relacionado al Control de Usuarios.'
+END
+GO
 --CREATE PROCEDURE sp_
 --(
 	

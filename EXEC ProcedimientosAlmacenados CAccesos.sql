@@ -38,3 +38,10 @@ EXEC sp_RegistrarBitacora 'Deslechado',1,'Faltaron tazones',1
 EXEC sp_EditarBitacora 11,'Deslechado Edit',1,'Faltaron tazones','',1
 -- idprac, mensaje, resultado
 EXEC sp_EliminarBitacora 11,'',1
+
+-- NamActiv, resultado, mensaje
+EXEC sp_RegistrarActividad 'N',1,''
+-- IdAct, NamActiv, mensaje, resultado
+EXEC sp_EditarActividad 3,'no','',1
+-- IdAct, mensaje, resultado
+EXEC sp_EliminarActividad 3,'',1

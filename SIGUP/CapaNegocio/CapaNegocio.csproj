@@ -47,6 +47,7 @@
     <Compile Include="RN_Carrera.cs" />
     <Compile Include="RN_CategoriaHerramienta.cs" />
     <Compile Include="RN_ControlAccesos.cs" />
+    <Compile Include="RN_Edificio.cs" />
     <Compile Include="RN_Herramienta.cs" />
     <Compile Include="RN_MarcaHerramienta.cs" />
     <Compile Include="RN_Prestamo.cs" />

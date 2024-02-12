@@ -9,6 +9,8 @@ INNER JOIN Areas a on a.IdArea = CU.Area order by CU.IdRegistro
 
 select IdHerramienta,  CONCAT( Nombre,' / ',cantidad) AS Nombre, Activo from Herramienta
 
+SELECT IdArea, NombreArea, A.IdEdificio AS IdEd, E.NombreEdificio AS NEdi FROM Areas A INNER JOIN Edificio E ON E.IdEdificio = A.IdEdificio
+
 SELECT Us.IdUsuario, CONCAT(Us.Nombre,' ',Us.Apellidos)Usuario
 FROM  usuario Us
 INNER JOIN tipo_usuario TU ON Us.Tipo = TU.IdTipo WHERE US.Tipo = 2
