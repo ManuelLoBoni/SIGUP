@@ -6,62 +6,82 @@
 <h1 class="mt-4">Herramientas</h1>
 @*<ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">Administra los elementos existentes del inventario</li>
-</ol>*@
+    </ol>*@
 
 <ol class="breadcrumb mb-4 mt-4">
     @*<li class="breadcrumb-item"><a href="#">Administrador</a></li>
 
-    <li class="breadcrumb-item active">Herramientas</li>*@
+        <li class="breadcrumb-item active">Herramientas</li>*@
     <li class="breadcrumb-item active">Administrador</li>
     <li class="breadcrumb-item"><a href="/SIGUP/Herramientas">Herramientas</a></li>
 </ol>
 <nav class="sticky-top bg-light">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-herramientas-tab" data-bs-toggle="tab" data-bs-target="#nav-herramientas" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Herramientas</button>
-        <button class="nav-link" id="nav-marcas-tab" data-bs-toggle="tab" data-bs-target="#nav-marcas" type="button" role="tab" aria-controls="nav-marcas" aria-selected="false">Marcas</button>
-        <button class="nav-link" id="nav-categorias-tab" data-bs-toggle="tab" data-bs-target="#nav-categorias" type="button" role="tab" aria-controls="nav-categorias" aria-selected="false">Categorías</button>
+        <button class="nav-link active" id="nav-herramientas-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-herramientas" type="button" role="tab" aria-controls="nav-home"
+                aria-selected="true">
+            Herramientas
+        </button>
+        <button class="nav-link" id="nav-marcas-tab" data-bs-toggle="tab" data-bs-target="#nav-marcas" type="button"
+                role="tab" aria-controls="nav-marcas" aria-selected="false">
+            Marcas
+        </button>
+        <button class="nav-link" id="nav-categorias-tab" data-bs-toggle="tab" data-bs-target="#nav-categorias"
+                type="button" role="tab" aria-controls="nav-categorias" aria-selected="false">
+            Categorías
+        </button>
     </div>
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-herramientas" role="tabpanel" aria-labelledby="nav-herramientas-tab">
-        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'herramientas')"> Añadir herramienta </button>*@
+        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'herramientas')"> Añadir
+            herramienta </button>*@
 
         <!-- Modal, con el id FormModal vamos a llamarlo cuando deseamos que aparezca y cuando no
-    al momento de precionar el boton nuevo-->
-        <div class="modal fade" id="FormModal_Herramientas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        al momento de precionar el boton nuevo-->
+        <div class="modal fade" id="FormModal_Herramientas" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-bs-backdrop="static">
             @*Esto ultimo de data-bs-backdrop es para*@
             <div class="modal-dialog ">
-                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no
+                    se puede quitar*@
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="exampleModalLabel">Herramientas</h5>
-                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body modal-bodyHerramientas">
                         @*El g-2 significa que va a agrupar las columnas de 2 en 2*@
 
-                        <input id="txtIdValidacionH" type="hidden" value="0" />@*Con el valor 0 se identifica si es un Administrador nuevo a ingresar o es valor ya existe
-                        pero si es diferente a 0 significa que ya existe y vamos a editar*@
+                        <input id="txtIdValidacionH" type="hidden" value="0" />@*Con el valor 0 se identifica si es un
+                            Administrador nuevo a ingresar o es valor ya existe
+                            pero si es diferente a 0 significa que ya existe y vamos a editar*@
                         @*Con el valor 0 se identifica si es un usuario nuevo a ingresar o es valor ya existe
-                        pero si es diferente a 0 significa que ya existe y vamos a editar*@
+                            pero si es diferente a 0 significa que ya existe y vamos a editar*@
                         <div class="row g-1">
                             <!--Porque solamente esta formando una fila-->
                             <div class="col-sm-5">
                                 <label for="txtIdHerramienta" class="form-label">ID de Herramienta</label>
-                                <input id="txtIdHerramienta"  class="form-control" type="text" autocomplete="off" placeholder="Ingresa el id de tu herramienta" />
+                                <input id="txtIdHerramienta" class="form-control" type="text" autocomplete="off"
+                                       placeholder="Ingresa el id de tu herramienta" />
                             </div>
 
                             <div class="col-sm-7">
                                 <label for="txtNombreHerramienta" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="txtNombreHerramienta" autocomplete="off" placeholder="Nombre la herramienta">
+                                <input type="text" class="form-control" id="txtNombreHerramienta" autocomplete="off"
+                                       placeholder="Nombre la herramienta">
                             </div>
                             <div class="col-sm-5">
                                 <label for="txtStockHerramienta" class="form-label">Cantidad</label>
-                                <input type="number" class="form-control" id="txtStockHerramienta" autocomplete="off" value="1">
+                                <input type="number" class="form-control" id="txtStockHerramienta" autocomplete="off"
+                                       value="1">
                             </div>
                             <div class="col-sm-7">
-                                <label for="cmbActivoHerramienta" class="form-label"> ¿Disponible para prestamos? </label>
+                                <label for="cmbActivoHerramienta" class="form-label">
+                                    ¿Disponible para prestamos?
+                                </label>
                                 <select id="cmbActivoHerramienta" class="form-select">
                                     <option value="1">Si</option>
                                     <option value="0">No</option>
@@ -82,7 +102,8 @@
 
                             <div class="col-sm-12">
                                 <label for="txtObservacionesHerramienta" class="form-label">Observaciones</label>
-                                <input type="text" class="form-control" id="txtObservacionesHerramienta" autocomplete="off" placeholder="Ingresa observaciones iniciales de la herramienta">
+                                <input type="text" class="form-control" id="txtObservacionesHerramienta"
+                                       autocomplete="off" placeholder="Ingresa observaciones iniciales de la herramienta">
                             </div>
 
 
@@ -97,26 +118,39 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-eliminarHerramienta" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
-                        <button type="button" class="btn btn-primary btn-editarCategoria" onclick="guardar('herramientas')">Guardar</button>
+                        <button type="button" class="btn btn-secondary btn-eliminarHerramienta" data-bs-dismiss="modal"
+                                id="btnCerrar">
+                            Cerrar
+                        </button>
+                        <button type="button" class="btn btn-primary btn-editarCategoria"
+                                onclick="guardar('herramientas')">
+                            Guardar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="card mt-3">
             @*<div class="card-header">
                 <i class="fas fa-table me-1"></i>Lista de Herramientas
-            </div>*@
+                </div>*@
             <div class="card-body">
                 @*boostrap es como manejar una hoja en excel*@
                 <div class="row">
                     <div class="col-12  d-flex justify-content-between align-items-center">
                         @*numero de filas*@
-                        <button type="button" class="btn btn-success" onclick="abrirModal(null, 'herramientas')">Añadir herramienta</button>
-                        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'herramientas')"> Añadir herramienta </button>*@
+                        <button type="button" class="btn btn-success" onclick="abrirModal(null, 'herramientas')">
+                            Añadir
+                            herramienta
+                        </button>
+                        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null,
+                            'herramientas')"> Añadir herramienta </button>*@
                         <form action="@Url.Action(" DescargarPDF_Herramienta","SIGUP")" class="mt-0 ml-2">
-                            <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                            <button class="btn btn-danger" type="submit">
+                                <i class="fas fa-file-pdf"></i> Descargar
+                                PDF
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -135,7 +169,8 @@
                         </tr>
                     </thead>
                     <tbody class="text-lg-center">
-                        @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el HomeControler*@
+                        @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el
+                            HomeControler*@
 
                     </tbody>
                 </table>
@@ -143,28 +178,33 @@
             </div>
 
         </div>
-       
+
     </div>
 
     <div class="tab-pane fade" id="nav-marcas" role="tabpanel" aria-labelledby="nav-marcas-tab">
-        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'marcas')"> Añadir nuevo </button>*@
+        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'marcas')"> Añadir nuevo
+            </button>*@
 
         <!-- Modal, con el id FormModal vamos a llamarlo cuando deseamos que aparezca y cuando no
-    al momento de precionar el boton nuevo-->
-        <div class="modal fade" id="FormModal_Marcas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        al momento de precionar el boton nuevo-->
+        <div class="modal fade" id="FormModal_Marcas" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-bs-backdrop="static">
             @*Esto ultimo de data-bs-backdrop es para*@
             <div class="modal-dialog">
-                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no
+                    se puede quitar*@
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="exampleModalLabel">Marcas</h5>
-                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body modal-bodyMarcas">
                         @*El g-2 significa que va a agrupar las columnas de 2 en 2*@
 
-                        <input id="txtIdMarca" type="hidden" value="0" />@*Con el valor 0 se identifica si es un usuario nuevo a ingresar o es valor ya existe
-                        pero si es diferente a 0 significa que ya existe y vamos a editar*@
+                        <input id="txtIdMarca" type="hidden" value="0" />@*Con el valor 0 se identifica si es un usuario
+                            nuevo a ingresar o es valor ya existe
+                            pero si es diferente a 0 significa que ya existe y vamos a editar*@
                         <div class="row g-1">
                             <!--Porque solamente esta formando una fila-->
 
@@ -191,7 +231,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCerrar">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="btnCerrar">
+                            Cerrar
+                        </button>
                         <button type="button" class="btn btn-primary" onclick="guardar('marcas')">Guardar</button>
                     </div>
                 </div>
@@ -210,20 +253,26 @@
         @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el HomeControler*@
 
         <!--</tbody>
-    </table>-->
+        </table>-->
         <div class="card mt-3">
             @*<div class="card-header">
                 <i class="fas fa-table me-1"></i>Lista de Marcas
-            </div>*@
+                </div>*@
             <div class="card-body">
                 @*boostrap es como manejar una hoja en excel*@
                 <div class="row">
                     <div class="col-12  d-flex justify-content-between align-items-center">
                         @*numero de filas*@
-                        <button type="button" class="btn btn-success" onclick="abrirModal(null, 'marcas')">Crear Nuevo</button>
-                       
+                        <button type="button" class="btn btn-success" onclick="abrirModal(null, 'marcas')">
+                            Crear
+                            Nuevo
+                        </button>
+
                         <form action="@Url.Action("DescargarPDF_Marca","SIGUP")" class="mt-0 ml-2">
-                            <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                            <button class="btn btn-danger" type="submit">
+                                <i class="fas fa-file-pdf"></i> Descargar
+                                PDF
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -238,7 +287,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el HomeControler*@
+                        @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el
+                            HomeControler*@
 
                     </tbody>
                 </table>
@@ -250,25 +300,32 @@
 
 
     <div class="tab-pane fade" id="nav-categorias" role="tabpanel" aria-labelledby="nav-categorias-tab">
-        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'marcas')"> Añadir nuevo </button>*@
+        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'marcas')"> Añadir nuevo
+            </button>*@
         @*<ol class="breadcrumb mb-4 mt-4">
             <li class="breadcrumb-item"><a href="#">Administrador</a></li>
             <li class="breadcrumb-item active">Categorias</li>
-        </ol>*@
+            </ol>*@
 
         <div class="card mt-3">
             @*<div class="card-header">
                 <i class="fas fa-table me-1"></i>Lista de Categorias
-            </div>*@
+                </div>*@
             <div class="card-body">
                 @*boostrap es como manejar una hoja en excel*@
                 <div class="row">
                     <div class="col-12  d-flex justify-content-between align-items-center">
                         @*numero de filas*@
-                        <button type="button" class="btn btn-success" onclick="abrirModal(null, 'categorias')">Crear Nuevo</button>
+                        <button type="button" class="btn btn-success" onclick="abrirModal(null, 'categorias')">
+                            Crear
+                            Nuevo
+                        </button>
 
                         <form action="@Url.Action("DescargarPDF_Categoria","SIGUP")" class="mt-0 ml-2">
-                            <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
+                            <button class="btn btn-danger" type="submit">
+                                <i class="fas fa-file-pdf"></i> Descargar
+                                PDF
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -283,7 +340,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el HomeControler*@
+                        @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el
+                            HomeControler*@
 
                     </tbody>
                 </table>
@@ -293,21 +351,25 @@
         </div>
 
         <!-- Modal, con el id FormModal vamos a llamarlo cuando deseamos que aparezca y cuando no
-    al momento de precionar el boton nuevo-->
-        <div class="modal fade" id="FormModalCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        al momento de precionar el boton nuevo-->
+        <div class="modal fade" id="FormModalCategoria" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-bs-backdrop="static">
             @*Esto ultimo de data-bs-backdrop es para*@
             <div class="modal-dialog">
-                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no
+                    se puede quitar*@
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="exampleModalLabel">Categoria</h5>
-                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body modal-bodyCategorias">
                         @*El g-2 significa que va a agrupar las columnas de 2 en 2*@
 
-                        <input id="txtIdCategoria" type="hidden" value="0" />@*Con el valor 0 se identifica si es un usuario nuevo a ingresar o es valor ya existe
-                        pero si es diferente a 0 significa que ya existe y vamos a editar*@
+                        <input id="txtIdCategoria" type="hidden" value="0" />@*Con el valor 0 se identifica si es un
+                            usuario nuevo a ingresar o es valor ya existe
+                            pero si es diferente a 0 significa que ya existe y vamos a editar*@
                         <div class="row g-1">
                             <!--Porque solamente esta formando una fila-->
 
@@ -336,7 +398,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-primary" onclick="guardar('categorias')">Guardar</button>
-                       
+
                     </div>
                 </div>
             </div>
@@ -344,11 +406,13 @@
 
 
         <!--Nuevo-->
-        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'categorias')"> Añadir nuevo </button>*@
+        @*<button class="btn btn-success" style="margin:20px 0;" onclick="abrirModal(null, 'categorias')"> Añadir nuevo
+            </button>*@
 
         <!-- Modal, con el id FormModal vamos a llamarlo cuando deseamos que aparezca y cuando no
-    al momento de precionar el boton nuevo-->
-        @*<div class="modal fade" id="FormModal_Categorias" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">*@
+        al momento de precionar el boton nuevo-->
+        @*<div class="modal fade" id="FormModal_Categorias" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" data-bs-backdrop="static">*@
 
 
         @*Esto ultimo de data-bs-backdrop es para*@
@@ -356,34 +420,34 @@
 
 
         @*<div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="guardar('categorias')">Guardar</button>
-                </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" onclick="guardar('categorias')">Guardar</button>
             </div>
-        </div>*@
+            </div>
+            </div>*@
 
 
 
 
         <!--<table id="tablaCategoria" class="display cell-border" style="width:100%">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Descripcion</th>
-            <th>Activo</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>-->
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripcion</th>
+                <th>Activo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>-->
         @*ajax va permitir por ejemplo, hacer la ejecuciion del metodo listarUsuario llamada en el HomeControler*@
 
         <!--</tbody>
-    </table>-->
+        </table>-->
     </div>
 </div>
 
 
-@section scripts{
+@section scripts {
     <script>
         //Elementos seleccionados para usos posteriores
         var tablaMarcas;
@@ -522,7 +586,7 @@
                             +
                             $("<button>").addClass("btn btn-danger btn-eliminarCategoria btn-sm ms-2").append(
                                 $("<i>").addClass("fas fa-trash")
-                        ).attr({ "data-informacioncategoria": JSON.stringify(row) })[0].outerHTML;
+                            ).attr({ "data-informacioncategoria": JSON.stringify(row) })[0].outerHTML;
 
                     },
                     "orderable": false,
@@ -564,7 +628,7 @@
                         $("#txtStockHerramienta").val(json.cantidad);
                         $("#cmbMarcaHerramienta").val(json.id_marcaHerramienta.idMarca).trigger('change');
                         $("#cmbCategoriaHerramienta").val(json.id_categoHerramienta.idCategoria).trigger('change');
-                      /*  $("#cmbUsuario").val(json.id_Usuario.idUsuario).trigger('change');*/
+                        /*  $("#cmbUsuario").val(json.id_Usuario.idUsuario).trigger('change');*/
                         $("#txtObservacionesHerramienta").val(json.observaciones);
                         $("#cmbActivoHerramienta").val(json.activo == true ? 1 : 0);
 
@@ -598,17 +662,17 @@
                     $("#mensajeErrorCategoria").hide();
                     /*Llamamos al form modal*/
                     if (json != null) {/*Porque el metodo abrir modal puede abrirse con crear nuevo o con editar,
-                    * por eso esta linea*/
+                        * por eso esta linea*/
                         $("#txtIdCategoria").val(json.idCategoria);/*Traerá el codigo pero no lo mostrará al usuario*/
                         $("#txtDescripcionCategoria").val(json.descripcion); /*El json o data, trae una propieadad llamada nombres*/
                         $("#cmbActivoCategoria").val(json.activo == true ? 1 : 0);/*Si es igual a true de el valor de uno
-                        y si no es true de el valor de 0*/
+                            y si no es true de el valor de 0*/
 
                     }
 
                     $("#FormModalCategoria").modal("show");
 
-                break;
+                    break;
 
                 default:
                     /*alert('No se ha seleccionado alguno');*/
@@ -642,79 +706,79 @@
                         },
                         observaciones: $('#txtObservacionesHerramienta').val(),
                         activo: $("#cmbActivoHerramienta").val() == 1 ? true : false /*Para saber si se esta seleccionado un Si (Si = 0)
-     * o un no (No = 0*/
+         * o un no (No = 0*/
                     }
                     console.log(Herramienta)
                     jQuery.ajax({/*Llama al metodo de guardar Administrador, que dependiendo de la accion va a crear nuevo
- o a editar, tomando en cuenta que se basa en que si el id = 0 o no*/
-    url: '@Url.Action("GuardarHerramienta", "SIGUP")',
-    type: "POST",
-    data: JSON.stringify({ objeto: Herramienta }),/*Paso de valores
-     el stringfy lo convierte a texto*/
-    dataType: "json",
-    contentType: "application/json; charset=utf-8",
-    success: function (data) {
-        $(".modal-bodyHerramientas").LoadingOverlay("hide");
-        //Administrador NUEVO
-        if (Herramienta.idValidacionHerramienta == "0") { /*Es decir, si el id es 0 en inicio (el valor es 0 inicialmente) significa que es
-            un Administrador nuevo, por lo que se ha dado dando clic con el boton de crear*/
-            /*alert("Crear Administrador")*/
+     o a editar, tomando en cuenta que se basa en que si el id = 0 o no*/
+                        url: '@Url.Action("GuardarHerramienta", "SIGUP")',
+                        type: "POST",
+                        data: JSON.stringify({ objeto: Herramienta }),/*Paso de valores
+         el stringfy lo convierte a texto*/
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $(".modal-bodyHerramientas").LoadingOverlay("hide");
+                            //Administrador NUEVO
+                            if (Herramienta.idValidacionHerramienta == "0") { /*Es decir, si el id es 0 en inicio (el valor es 0 inicialmente) significa que es
+                un Administrador nuevo, por lo que se ha dado dando clic con el boton de crear*/
+                                /*alert("Crear Administrador")*/
 
-            if (data.resultado != "0") {
-             //   Herramienta.idHerramienta = data.resultado;
-             ///*   tabladata.row.add(Administrador).draw(false);*/
+                                if (data.resultado != "0") {
+                                    //   Herramienta.idHerramienta = data.resultado;
+                                    ///*   tabladata.row.add(Administrador).draw(false);*/
 
-             //   $("#FormModal_Herramientas").modal("hide");
-             //  /* $("#mensajeErrorHerramientas").hide();*/
-             //   tablaHerramientas.ajax.reload();
-
-
-                console.log("Entró");
-                Herramienta.idHerramienta = data.resultado;
-               /* tablaHerramientas.row.add(Herramienta).draw(false);*/
-                //$("#btnEliminar").trigger('click');
-                $("#FormModal_Herramientas").modal("hide");
-                tablaHerramientas.ajax.reload();
+                                    //   $("#FormModal_Herramientas").modal("hide");
+                                    //  /* $("#mensajeErrorHerramientas").hide();*/
+                                    //   tablaHerramientas.ajax.reload();
 
 
-            } else {
+                                    console.log("Entró");
+                                    Herramienta.idHerramienta = data.resultado;
+                                    /* tablaHerramientas.row.add(Herramienta).draw(false);*/
+                                    //$("#btnEliminar").trigger('click');
+                                    $("#FormModal_Herramientas").modal("hide");
+                                    tablaHerramientas.ajax.reload();
 
-                $("#mensajeErrorHerramientas").text(data.mensaje);
-                $("#mensajeErrorHerramientas").show();
-            }
-        }
-        //Administrador Editar
-        else {
-            /* alert("Editar Administrador")*/
-            /*Pero si el id es diferente de 0, es decir ya existe, entonces se esta editando
-             a un Administrador, por lo que indica que se ha dado clic en el boton de editar, eso lo comprobamos
-             con los alert comentados*/
 
-            if (data.resultado) {
-                tablaHerramientas.ajax.reload();
-                /*tabladata.row(filaSeleccionada).data(Administrador).draw(false);*/
-                /*filaSeleccionada = null;*/
-                $("#FormModal_Herramientas").modal("hide");
+                                } else {
 
-            } else {
-                $("#mensajeErrorHerramientas").text(data.mensaje);
-                $("#mensajeErrorHerramientas").show();
-            }
-        }
-    },
-    error: function (error) {
-        $(".modal-bodyHerramientas").LoadingOverlay("hide");
-        $("#mensajeErrorHerramientas").text("Error Ajax");
-        $("#mensajeErrorHerramientas").show();
-    },
-    beforeSend: function () {
-        $(".modal-bodyHerramientas").LoadingOverlay("show", {
-            imageResizeFactor: 2,
-            text: "Cargando...",
-            size: 14
-        });
-    }
-});
+                                    $("#mensajeErrorHerramientas").text(data.mensaje);
+                                    $("#mensajeErrorHerramientas").show();
+                                }
+                            }
+                            //Administrador Editar
+                            else {
+                                /* alert("Editar Administrador")*/
+                                /*Pero si el id es diferente de 0, es decir ya existe, entonces se esta editando
+                                 a un Administrador, por lo que indica que se ha dado clic en el boton de editar, eso lo comprobamos
+                                 con los alert comentados*/
+
+                                if (data.resultado) {
+                                    tablaHerramientas.ajax.reload();
+                                    /*tabladata.row(filaSeleccionada).data(Administrador).draw(false);*/
+                                    /*filaSeleccionada = null;*/
+                                    $("#FormModal_Herramientas").modal("hide");
+
+                                } else {
+                                    $("#mensajeErrorHerramientas").text(data.mensaje);
+                                    $("#mensajeErrorHerramientas").show();
+                                }
+                            }
+                        },
+                        error: function (error) {
+                            $(".modal-bodyHerramientas").LoadingOverlay("hide");
+                            $("#mensajeErrorHerramientas").text("Error Ajax");
+                            $("#mensajeErrorHerramientas").show();
+                        },
+                        beforeSend: function () {
+                            $(".modal-bodyHerramientas").LoadingOverlay("show", {
+                                imageResizeFactor: 2,
+                                text: "Cargando...",
+                                size: 14
+                            });
+                        }
+                    });
                     console.log("hola");
                     console.log(Herramienta);
 
@@ -769,82 +833,82 @@
                             $("#mensajeErrorMarca").show();
                         }
                     })
-                break;
+                    break;
 
                 case 'categorias':
 
-                        var Categoria = {
-                            idCategoria: $("#txtIdCategoria").val(), /*Los dos puntos de la condicion es "si es diferente es:"
-                             el signo de interrogacion es un entonces
-                             leyendo la sentencia de abajo seria, si el valor es igual a 1, entonces es true (verdadero)
-                             pero si es diferentes es falso*/
-                            descripcion: $("#txtDescripcionCategoria").val(),/*El punto val sirve para obtener un valor y para establecer un valor*/
-                            activo: $("#cmbActivoCategoria").val() == 1 ? true : false, /*Para saber si se esta seleccionado un Si (Si = 0)
-                             * o un no (No = 0*/
-                        }
-                        jQuery.ajax({/*Llama al metodo de guardar usuario, que dependiendo de la accion va a crear nuevo
-                          o a editar, tomando en cuenta que se basa en que si el id = 0 o no*/
-                            url: '@Url.Action("GuardarCategoria", "SIGUP")',
-                            type: "POST",
-                            data: JSON.stringify({ objeto: Categoria}),/*Paso de valores
-                             el stringfy lo convierte a texto*/
-                            dataType: "json",
-                            contentType: "application/json; charset=utf-8",
-                            success: function (data) {
-                                $(".modal-bodyCategorias").LoadingOverlay("hide");
-                                //CATEGORIA NUEVO
-                                if (Categoria.IdCategoria == "0") { /*Es decir, si el id es 0 en inicio (el valor es 0 inicialmente) significa que es
-                                    un usuario nuevo, por lo que se ha dado dando clic con el boton de crear*/
-                                    /*alert("Crear usuario")*/
+                    var Categoria = {
+                        idCategoria: $("#txtIdCategoria").val(), /*Los dos puntos de la condicion es "si es diferente es:"
+                                 el signo de interrogacion es un entonces
+                                 leyendo la sentencia de abajo seria, si el valor es igual a 1, entonces es true (verdadero)
+                                 pero si es diferentes es falso*/
+                        descripcion: $("#txtDescripcionCategoria").val(),/*El punto val sirve para obtener un valor y para establecer un valor*/
+                        activo: $("#cmbActivoCategoria").val() == 1 ? true : false, /*Para saber si se esta seleccionado un Si (Si = 0)
+                                 * o un no (No = 0*/
+                    }
+                    jQuery.ajax({/*Llama al metodo de guardar usuario, que dependiendo de la accion va a crear nuevo
+                              o a editar, tomando en cuenta que se basa en que si el id = 0 o no*/
+                        url: '@Url.Action("GuardarCategoria", "SIGUP")',
+                        type: "POST",
+                        data: JSON.stringify({ objeto: Categoria }),/*Paso de valores
+                                 el stringfy lo convierte a texto*/
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $(".modal-bodyCategorias").LoadingOverlay("hide");
+                            //CATEGORIA NUEVO
+                            if (Categoria.IdCategoria == "0") { /*Es decir, si el id es 0 en inicio (el valor es 0 inicialmente) significa que es
+                                        un usuario nuevo, por lo que se ha dado dando clic con el boton de crear*/
+                                /*alert("Crear usuario")*/
 
-                                    if (data.resultado != 0) {
-                                        Categoria.IdCategoria = data.resultado;
-                                        tabladata.row.add(Categoria).draw(false);
-                                        $("#FormModalCategoria").modal("hide");
-                                        tabladata.ajax.reload();
-                                    } else {
+                                if (data.resultado != 0) {
+                                    Categoria.IdCategoria = data.resultado;
+                                    tabladata.row.add(Categoria).draw(false);
+                                    $("#FormModalCategoria").modal("hide");
+                                    tabladata.ajax.reload();
+                                } else {
 
-                                        $("#mensajeErrorCategoria").text(data.mensaje);
-                                        $("#mensajeErrorCategoria").show();
-                                    }
-                                }
-                                //CATEGORIA Editar
-                                else {
-                                    /*Pero si el id es diferente de 0, es decir ya existe, entonces se esta editando
-                                     a un usuario, por lo que indica que se ha dado clic en el boton de editar, eso lo comprobamos
-                                     con los alert comentados*/
-
-                                    if (data.resultado) {
-                                        tabladata.ajax.reload();
-                                       /* tabladata.row(filaSeleccionada).data(Categoria).draw(false);*/
-                                        filaSeleccionada = null;
-                                        $("#FormModalCategoria").modal("hide");
-
-                                    } else {
-                                        $("#mensajeErrorCategoria").text(data.mensaje);
-                                        $("#mensajeErrorCategoria").show();
-                                    }
-                                }
-                            },
-                                error: function (error) {
-                                    $(".modal-bodyCategorias").LoadingOverlay("hide");
-                                    $("#mensajeErrorCategoria").text("Error Ajax");
+                                    $("#mensajeErrorCategoria").text(data.mensaje);
                                     $("#mensajeErrorCategoria").show();
-                                },
-                                beforeSend: function () {
-                                    $(".modal-bodyCategorias").LoadingOverlay("show", {
-                                        imageResizeFactor: 2,
-                                        text: "Cargando...",
-                                        size: 24
-                                    });
                                 }
-                             });
+                            }
+                            //CATEGORIA Editar
+                            else {
+                                /*Pero si el id es diferente de 0, es decir ya existe, entonces se esta editando
+                                 a un usuario, por lo que indica que se ha dado clic en el boton de editar, eso lo comprobamos
+                                 con los alert comentados*/
+
+                                if (data.resultado) {
+                                    tabladata.ajax.reload();
+                                    /* tabladata.row(filaSeleccionada).data(Categoria).draw(false);*/
+                                    filaSeleccionada = null;
+                                    $("#FormModalCategoria").modal("hide");
+
+                                } else {
+                                    $("#mensajeErrorCategoria").text(data.mensaje);
+                                    $("#mensajeErrorCategoria").show();
+                                }
+                            }
+                        },
+                        error: function (error) {
+                            $(".modal-bodyCategorias").LoadingOverlay("hide");
+                            $("#mensajeErrorCategoria").text("Error Ajax");
+                            $("#mensajeErrorCategoria").show();
+                        },
+                        beforeSend: function () {
+                            $(".modal-bodyCategorias").LoadingOverlay("show", {
+                                imageResizeFactor: 2,
+                                text: "Cargando...",
+                                size: 24
+                            });
+                        }
+                    });
 
 
-                break;
+                    break;
 
                 default:
-                   /* alert('No se ha seleccionado ningun case');*/
+                    /* alert('No se ha seleccionado ningun case');*/
                     swal({
                         title: "Guardar",
                         text: "No se ha seleccionado algun case",
@@ -955,27 +1019,27 @@
                 function (isConfirm) {
                     if (isConfirm) {
                         jQuery.ajax({
-                        url: '@Url.Action("EliminarCategoria", "SIGUP")',
-                        type: "POST",
-                        data: JSON.stringify({ id:json.idCategoria }),
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
+                            url: '@Url.Action("EliminarCategoria", "SIGUP")',
+                            type: "POST",
+                            data: JSON.stringify({ id: json.idCategoria }),
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
 
-                            if (data.resultado) {
-                                tabladata.ajax.reload();
-                            }else {
-                                swal("No se pudo eliminar", data.mensaje, "error")
+                                if (data.resultado) {
+                                    tabladata.ajax.reload();
+                                } else {
+                                    swal("No se pudo eliminar", data.mensaje, "error")
+                                }
+                            },
+                            error: function (error) {
+                                console.log(error)
                             }
-                        },
-                        error: function (error) {
-                            console.log(error)
-                        }
 
-                     });
+                        });
                         swal("¡Eliminado!", "La categoria ha sido eliminada correctamente", "success");
                     } else {
-                       /* swal("Cancelled", "Your imaginary file is safe :)", "error");*/
+                        /* swal("Cancelled", "Your imaginary file is safe :)", "error");*/
                     }
                 });
 
@@ -1013,7 +1077,7 @@
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {/*Ese data esta almacenando la respuesta del metodo eliminar usuario
-                                * hecho en homeController*/
+                                    * hecho en homeController*/
                                 //ELIMINAR CATEGORIA
 
                                 if (data.resultado) { /*si el resultado es verdadera)*/
@@ -1055,56 +1119,55 @@
         $("#tablaHerramientas tbody").on("click", '.btn-eliminarHerramienta', function () {
 
             var json = $(this).data("informacionherramienta")
-        swal({
-            title: "¿Está seguro de eliminar la herramienta?",
-            text: "Se eliminará completamente del sistema junto con los préstamos correspodientes a esta herramienta",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonClass: "btn-primary",
-            confirmButtonText: "Si",
-            cancelButtonText: "No",
-            closeOnConfirm: false
-        },
+            swal({
+                title: "¿Está seguro de eliminar la herramienta?",
+                text: "Se eliminará completamente del sistema junto con los préstamos correspodientes a esta herramienta",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Si",
+                cancelButtonText: "No",
+                closeOnConfirm: false
+            },
 
-            function (isConfirm) {
-                if (isConfirm) {
-                    jQuery.ajax({
-                        url: '@Url.Action("EliminarHerramienta", "SIGUP")',
-                        type: "POST",
-                        data: JSON.stringify({ id: json.idHerramienta }),/*Paso de valores*/
-                        /*el stringfy lo convierte a texto*/
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {/*Ese data esta almacenando la respuesta del metodo eliminar usuario
-                            * hecho en homeController*/
-                            //ELIMINAR CATEGORIA
+                function (isConfirm) {
+                    if (isConfirm) {
+                        jQuery.ajax({
+                            url: '@Url.Action("EliminarHerramienta", "SIGUP")',
+                            type: "POST",
+                            data: JSON.stringify({ id: json.idHerramienta }),/*Paso de valores*/
+                            /*el stringfy lo convierte a texto*/
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {/*Ese data esta almacenando la respuesta del metodo eliminar usuario
+                                * hecho en homeController*/
+                                //ELIMINAR CATEGORIA
 
-                            if (data.resultado) { /*si el resultado es verdadera)*/
-                                //tabladata.row(usuarioSeleccionado).remove().draw();
-                                tablaHerramientas.ajax.reload();
-                            } else {
-                                swal("No se pudo eliminar", data.mensaje, "error")
-                                return false;
-                            }/*Primer parametro mensaje, luego el mensaje del data, y el tercero indica que es de tipo error*/
+                                if (data.resultado) { /*si el resultado es verdadera)*/
+                                    //tabladata.row(usuarioSeleccionado).remove().draw();
+                                    tablaHerramientas.ajax.reload();
+                                } else {
+                                    swal("No se pudo eliminar", data.mensaje, "error")
+                                    return false;
+                                }/*Primer parametro mensaje, luego el mensaje del data, y el tercero indica que es de tipo error*/
 
-                        },
-                        error: function (error) {
-                            console.log(error)
-                            swal("Error: ", error, "error")
-                        }
+                            },
+                            error: function (error) {
+                                console.log(error)
+                                swal("Error: ", error, "error")
+                            }
 
-                    });
-                   
-                    swal("¡Eliminado!", "La herramienta ha sido eliminada correctamente", "success");
-                } 
-            });
+                        });
+
+                        swal("¡Eliminado!", "La herramienta ha sido eliminada correctamente", "success");
+                    }
+                });
 
 
 
-    });
+        });
         //$("#tablaHerramientas tbody").on('click', '.btn-eliminarHerramienta', function (evento) {
 
         //})
     </script>
 }
-

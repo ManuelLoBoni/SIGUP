@@ -59,7 +59,7 @@
                 @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="exampleModalLabel">Prestamo</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Carreras</h5>
                         <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="contenedor">
@@ -90,7 +90,7 @@
         </div>
     </div>
 
-    
+
 
     @*                                          TABLA AREAS                                         *@
 
@@ -125,6 +125,42 @@
 
             </div>
         </div>
+
+        <div class="modal fade" id="FormModalEdificio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            @*Esto ultimo de data-bs-backdrop es para*@
+            <div class="modal-dialog">
+                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">Prestamo</h5>
+                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="contenedor">
+                        <input id="txtIdEdificio" type="hidden" value="0" />
+                        <div class="row g-2">
+
+                            <div class="col-sm-12">
+                                <label class="form-label">Nombre del Edificio</label>
+                                <input type="text" class="form-control" id="txtNombreEdificio" autocomplete="off" placeholder="Escribe el nombre del edificio.">
+                            </div>
+
+                        </div>
+                        <!--mensaje de alerta-->
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div id="mensajeErrorEd" class="alert alert-danger" role="alert">
+                                    A simple danger alert—check it out!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="footer-modal">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="GuardarCarreraCU()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     @*                                          TABLA EDIFICIOS                                         *@
@@ -137,7 +173,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12  d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-success" onclick="abrirModal()">Crear Nuevo</button>
+                        <button type="button" class="btn btn-success" onclick="abrirModalEd()">Crear Nuevo</button>
 
                         <form action="@Url.Action("DescargarPDF_Prestamos","SIGUP")" class="mt-0 ml-2">
                             <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> Descargar PDF</button>
@@ -157,6 +193,42 @@
                     </tbody>
                 </table>
 
+            </div>
+        </div>
+
+        <div class="modal fade" id="FormModalEdificio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            @*Esto ultimo de data-bs-backdrop es para*@
+            <div class="modal-dialog">
+                @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">Edificio</h5>
+                        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="contenedor">
+                        <input id="txtIdEdificio" type="hidden" value="0" />
+                        <div class="row g-2">
+
+                            <div class="col-sm-12">
+                                <label class="form-label">Nombre del Edificio</label>
+                                <input type="text" class="form-control" id="txtNombreEdificio" autocomplete="off" placeholder="Escribe el nombre del edificio.">
+                            </div>
+
+                        </div>
+                        <!--mensaje de alerta-->
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div id="mensajeErrorEd" class="alert alert-danger" role="alert">
+                                    A simple danger alert—check it out!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="footer-modal">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="GuardarCarreraCU()">Guardar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -198,7 +270,7 @@
 
 @section scripts{
     @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>*@
-<script>
+    <script>
         //BIEN
         var tablaCarreras;
     var tablaEdificios;
@@ -404,6 +476,22 @@
             $("#FormModal").modal("show");
         }
 
+        function abrirModalEd(json) {
+
+            /*Asignacion de valores al abrir el modal*/
+            $("#txtIdEdificio").val(0);
+            $("#txtNombreEdificio").val("");
+
+            $("#mensajeError").hide();
+
+            if (json != null) {
+                $("#txtId").val(json.idEdificio);
+                $("#txtDescripcion").val(json.nombreEdificio);
+
+            }
+
+            $("#FormModalEdificio").modal("show");
+        }
 
 
             function GuardarCarreraCU() {
@@ -461,5 +549,5 @@
 
         }
 
-</script>
+    </script>
 }
