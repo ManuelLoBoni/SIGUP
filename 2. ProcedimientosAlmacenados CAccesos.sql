@@ -78,7 +78,7 @@ BEGIN
 	SET @Resultado = 0
 	IF NOT EXISTS (SELECT * FROM Areas WHERE IdArea = @IdArea)
 	BEGIN
-		INSERT INTO Areas (IdArea,NombreArea,IdEdificio) VALUES (@IdArea,@NombreArea,@IdEdificio)
+		INSERT INTO Areas (NombreArea,IdEdificio) VALUES (@NombreArea,@IdEdificio)
         SET @Resultado = scope_identity()
 	END
 	ELSE
@@ -345,6 +345,7 @@ BEGIN
             IdRegistro = @IdRegistro,
             Observaciones = @Observaciones
         WHERE IdPractica = @IdPractica
+		SET @Resultado = 1
 	END
 	ELSE
 		SET @Mensaje = 'El registro con la id solicitada no fue encontrado.'

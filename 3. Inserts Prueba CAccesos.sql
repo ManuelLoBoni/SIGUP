@@ -4,14 +4,14 @@ GO
 INSERT INTO Edificio (NombreEdificio)
 VALUES ('Unidad de Prácticas'), ('Edificio A'), ('Edificio E'), ('Edificio M'), ('Centro de Cómputo');
 
-INSERT INTO Areas (IdArea, NombreArea, IdEdificio)
-VALUES (1, 'Taller de Línea de Producción', 1),
-       (2, 'Taller de Manufactura Convencional', 1),
-       (3, 'Laboratorio de Manufactura Avanzada', 3),
-       (4, 'Laboratorio de Electromecánica', 1),
-	   (5, 'Laboratorio de Análisis de los Alimentos', 1),
-       (6, 'Laboratorio de Metrología y Pruebas', 1),
-       (7, 'Laboratorio de Neumática', 1);
+INSERT INTO Areas (NombreArea, IdEdificio)
+VALUES ('Taller de Línea de Producción', 1),
+       ('Taller de Manufactura Convencional', 1),
+       ('Laboratorio de Manufactura Avanzada', 3),
+       ('Laboratorio de Electromecánica', 1),
+	   ('Laboratorio de Análisis de los Alimentos', 1),
+       ('Laboratorio de Metrología y Pruebas', 1),
+       ('Laboratorio de Neumática', 1);
        
 INSERT INTO tipo_usuario (nombre_tipo)
 VALUES ('Estudiante'), ('Docente');

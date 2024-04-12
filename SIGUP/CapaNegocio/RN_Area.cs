@@ -24,11 +24,7 @@ namespace CapaNegocio
         {
             Mensaje = string.Empty;
 
-            if (area.idArea == 0)
-            {
-                Mensaje = "El id del Área no puede estar vacío";
-            }
-            else if(string.IsNullOrEmpty(area.nombreArea) || string.IsNullOrWhiteSpace(area.nombreArea))
+            if (string.IsNullOrEmpty(area.nombreArea) || string.IsNullOrWhiteSpace(area.nombreArea))
             {
                 Mensaje = "El nombre del Área no puede estar vacío";
             }
@@ -49,11 +45,7 @@ namespace CapaNegocio
         {
             Mensaje = string.Empty;
 
-            if (area.idArea == 0)
-            {
-                Mensaje = "El id del Área no puede estar vacío";
-            }
-            else if (string.IsNullOrEmpty(area.nombreArea) || string.IsNullOrWhiteSpace(area.nombreArea))
+            if (string.IsNullOrEmpty(area.nombreArea) || string.IsNullOrWhiteSpace(area.nombreArea))
             {
                 Mensaje = "El nombre del Área no puede estar vacío";
             }

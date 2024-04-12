@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewBag.Title = "Areas";
+    Layout = "~/Views/Shared/ControlAccesos.cshtml";
+}
+
+<h2>Areas</h2>
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="#">Administrador</a></li>
+    <li class="breadcrumb-item active">Control de Accesos</li>
+    <li class="breadcrumb-item active">Areas</li>
+</ol>
+<div class="card">
+    <div class="card-header">
+
+        <i class="fas fa-list me-1"></i>Lista de Áreas
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12  d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-success" onclick="abrirModal()">Registrar</button>
+            </div>
+        </div>
+        <hr /> @*el id es para identificar la tabla*@
+        <table id="tabla" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Área</th>
+                    <th>Edificio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*Aqui va el render de ajax*@
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- Modal, con el id FormModal vamos a llamarlo cuando deseamos que aparezca y cuando no
+    al momento de precionar el boton nuevo-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    @*Esto ultimo de data-bs-backdrop es para*@
+    <div class="modal-dialog">
+        @*no poder quitar es modal a menos que demos clic en cerrar o en la x, si hacemos clic en otro lado no se puede quitar*@
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Área</h5>
+                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="contenedor">
+
+                <input id="txtId" type="hidden" value="0" />@*Con el valor 0 se identifica si es un Prestamo nuevo a ingresar o es valor ya existe
+                    pero si es diferente a 0 significa que ya existe y vamos a editar*@
+                <div class="row g-2">
+                    <div class="col-sm-6">
+                        <label class="form-label">Nombre del Área</label>
+                        <input type="text" class="form-control" id="txtArea" autocomplete="off" placeholder="Escribe el nombre del área.">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Edificio</label>
+                        <select id="cmbEdificio" class="form-select">
+                        </select>
+                    </div>
+                </div>
+                <!--mensaje de alerta-->
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeError" class="alert alert-danger" role="alert">
+                            <label class="form-label" id="lblAlerta"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" id="footer-modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+
+    <script>
+        //Variables Globales
+        var tabladata;
+
+        //----------------------------------------TABLA-------------------------------------------------
+        //Aqui se encuentra el cuerpo de la tabla
+        tabladata  = $("#tabla").DataTable({
+            responsive: true,/*Para que sea resposiva*/
+            ordering: true,
+            "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
+                url: '@Url.Action("ListarAreaCCU", "ControlAccesos")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "nombreArea" },
+                {
+                    "data": "e_edificio", "render": function (data) {
+                        return data.nombreEdificio
+                    }
+                },
+                {
+                    "data": "idArea", "render": function (data, type, row, meta) {
+
+                        return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
+                            $("<i>").addClass("fas fa-pen")
+                        ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML
+                            +
+                            $("<button>").addClass("btn btn-danger btn-eliminar btn-sm ms-2").append(
+                                $("<i>").addClass("fas fa-trash")
+                            ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML;
+
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "90px"
+                }
+            ],/*Propiedad o atributos van dentro de las comillas ""*/
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            }
+
+        });
+
+        jQuery.ajax({
+          url: '@Url.Action("ListarEdificiosCU", "ControlAccesos")',
+          type: "GET",
+          data: null,
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          success: function (data) {
+              $("#cmbEdificio").append($("<option selected>").val("").attr({ "value": "0", "disabled": "true" }).text("Seleccionar"));
+              $.each(data.data, function (index, item) {
+                  $("<option>").attr({ "value": item.idEdificio }).text(item.nombreEdificio).appendTo("#cmbEdificio");
+              })
+          },
+          error: function (error) {
+              console.log(error)
+            }
+        });
+
+        function abrirModal(json) /*json es el data del siguiente*/ {
+
+            /*Asignacion de valores al abrir el modal*/
+            $("#txtId").val(0);
+            $("#txtArea").val("");
+            $("#cmbEdificio").val($("#cmbEdificio option:first").val());
+
+            $("#mensajeError").hide();
+            //La siguiente validacion es por que el modal sirve para guardar y editar, entonces al abrir trae la informacion dependiendo del boton.
+            if (json != null) {
+                $("#txtId").val(json.idArea);
+                $("#txtArea").val(json.nombreArea);
+                $("#cmbEdificio").val(json.e_edificio.idEdificio);
+            }
+
+            $("#FormModal").modal("show");
+        }
+
+        /*--------------- Al dar clic en el boton de editar-------------------------------*/
+
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+            var json = $(this).data("informacion")
+            abrirModal(json)
+        })
+
+        /*--------------- Al dar clic en el boton de editar solo fecha prestamo y activo-------------------------------*/
+
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+            var json = $(this).data("informacion")
+            swal({
+                title: "¿Esta Seguro?",
+                text: "¿Desea eliminar el Área?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Si",
+                cancelButtonText: "No",
+                closeOnConfirm: false //ATENCION si este se pone en true puede que ya no sirva el mensaje de error o confirmación
+            },
+            function (isConfirm) {
+            if (isConfirm) {
+                jQuery.ajax({
+                url: '@Url.Action("EliminarAreasCU", "ControlAccesos")',
+                type: "POST",
+                    data: JSON.stringify({ id: json.idArea }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    if (data.resultado) {
+                        swal("¡Eliminado!", "El Área ha sido eliminada correctamente", "success")
+                        tabladata.ajax.reload()
+                    } else {
+                        swal("¡Error!", data.mensaje, "error")
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+
+             });
+            } else {
+               /* swal("Cancelled", "Your imaginary file is safe :)", "error");*/
+            }
+        });
+        })
+
+        function Guardar() {
+
+            var Registro = {
+                idArea: $("#txtId").val(),
+                nombreArea: $("#txtArea").val(),
+                e_edificio: {
+                    idEdificio: $("#cmbEdificio option:selected").val(),
+                    nombreEdificio: $("#cmbEdificio option:selected").text()
+                },
+            }
+                jQuery.ajax({
+                url: '@Url.Action("GuardarAreasCU", "ControlAccesos")',
+                    type: "POST",
+                    data: JSON.stringify({ area: Registro }), // el accesos es el parametro del metodo del controlador, el otro es la variable
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    //CATEGORIA NUEVO
+                    if (Registro.idArea == "0") {
+                        if (data.resultado != 0) {
+                            Registro.idArea = data.resultado;
+                            tabladata.row.add(Registro).draw(false);
+                            $("#FormModal").modal("hide");
+                            tabladata.ajax.reload();
+                        } else {
+
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+                    }
+                    //CATEGORIA Editar
+                    else {
+                        if (data.resultado) {
+                            tabladata.ajax.reload();
+                            $("#FormModal").modal("hide");
+
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+                    }
+                },
+                error: function (error) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#mensajeError").text("Error Ajax");
+                    $("#mensajeError").show();
+                },
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 24
+                    });
+                }
+            });
+
+        }
+    </script>
+}

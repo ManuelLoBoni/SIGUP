@@ -97,7 +97,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand("sp_RegistrarAreas", oConexion);
                     cmd.Parameters.AddWithValue("@IdArea", area.idArea);
                     cmd.Parameters.AddWithValue("@NombreArea", area.nombreArea);
-                    cmd.Parameters.AddWithValue("@IdEdificio", area.e_edificio);
+                    cmd.Parameters.AddWithValue("@IdEdificio", area.e_edificio.idEdificio);
                     //Dos parametros de salida, un entero de resultaado y un string de mensaje
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
@@ -129,7 +129,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand("sp_EditarAreas", oConexion);
                     cmd.Parameters.AddWithValue("@IdArea", area.idArea);
                     cmd.Parameters.AddWithValue("@NombreArea", area.nombreArea);
-                    cmd.Parameters.AddWithValue("@IdEdificio", area.e_edificio);
+                    cmd.Parameters.AddWithValue("@IdEdificio", area.e_edificio.idEdificio);
                     //Dos parametros de salida, un entero de resultaado y un string de mensaje
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;

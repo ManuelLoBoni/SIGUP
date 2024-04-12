@@ -27,7 +27,7 @@ namespace CapaNegocio
             {
                 Mensaje = "Debes seleccionar una fecha.";
             }
-            else if (string.IsNullOrEmpty(registroCU.E_IdUsuario.idUsuario) || string.IsNullOrWhiteSpace(registroCU.E_IdUsuario.idUsuario))
+            else if (string.IsNullOrEmpty(registroCU.E_IdUsuario.idUsuario) || string.IsNullOrWhiteSpace(registroCU.E_IdUsuario.idUsuario) || registroCU.E_IdUsuario.idUsuario.Equals("0"))
             {
                 Mensaje = "Debes seleccionar un usuario.";
             }
@@ -47,13 +47,13 @@ namespace CapaNegocio
             {
                 Mensaje = "Debes añadir un semestre entre 1 y 12";
             }
-            else if (registroCU.E_IdCarrera.idCarrera == 0)
-            {
-                Mensaje = "Debes seleccionar una carrera.";
-            }
             else if (registroCU.E_IdArea.idArea == 0)
             {
                 Mensaje = "Debe seleccionar un área.";
+            }
+            else if (registroCU.E_IdCarrera.idCarrera == 0)
+            {
+                Mensaje = "Debes seleccionar una carrera.";
             }
             if (string.IsNullOrEmpty(Mensaje))
             {
@@ -125,6 +125,10 @@ namespace CapaNegocio
             {
                 return false;
             }
+        }
+        public byte[] GenerarPDF()
+        {
+            return objCD.GenerarPDF();
         }
     }
 }

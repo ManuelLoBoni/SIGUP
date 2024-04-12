@@ -25,7 +25,7 @@ namespace CapaNegocio
             }
             if (string.IsNullOrEmpty(Mensaje))
             {
-                return objEdificio.añadir_edifcio(edificio, out Mensaje);
+                return objEdificio.añadir_edificio(edificio, out Mensaje);
             }
             else
             {
@@ -38,7 +38,7 @@ namespace CapaNegocio
 
             if (string.IsNullOrEmpty(edificio.nombreEdificio) || string.IsNullOrWhiteSpace(edificio.nombreEdificio))
             {
-                Mensaje = "El nombre de la carrera no puede estar vacío";
+                Mensaje = "El nombre del edificio no puede estar vacío";
             }
             if (string.IsNullOrEmpty(Mensaje))
             {

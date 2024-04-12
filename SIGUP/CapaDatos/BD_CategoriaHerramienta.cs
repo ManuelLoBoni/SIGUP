@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using CapaEntidad;
 using System.Data.SqlClient;
 using System.Data; /*Acceso a sql conections*/
-//using QuestPDF.Fluent;//Para exportar a pdf
-//using QuestPDF.Helpers;
+using QuestPDF.Fluent;//Para exportar a pdf
+using QuestPDF.Helpers;
 using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CapaDatos
 {
@@ -82,41 +83,6 @@ namespace CapaDatos
 
             return lista;
         }
-
-        //public List<EN_CategoriaHerramienta> ListarCategoriaEnLibro()
-        //{
-        //    List<EN_CategoriaHerramienta> lista = new List<EN_CategoriaHerramienta>();
-        //    try
-        //    {
-        //        using (SqlConnection oConexion = new SqlConnection(BD_Conexion.cn))
-        //        {
-        //            string query = "SELECT IdCategoria, Descripcion, Activo FROM CATEGORIA where Activo = 1";
-        //            SqlCommand cmd = new SqlCommand(query, oConexion);
-        //            cmd.CommandType = CommandType.Text;/*En este caso es de tipo Text (no usamos para este ejemplo, procedimientos almacenados*/
-
-        //            oConexion.Open();
-        //            using (SqlDataReader dr = cmd.ExecuteReader())/*Lee todos los resultados que aparecen en la ejecucion del select anter ior*/
-        //            {
-        //                while (dr.Read())/*Mientras reader esta leyendo, ira agregando a la lista dicha lectura*/
-        //                {
-        //                    lista.Add(/*Agrega una nueva categorias a la lista*/
-        //                        new EN_CategoriaHerramienta()
-        //                        {
-        //                            idCategoria = Convert.ToInt32(dr["IdCategoria"]),
-        //                            descripcion = dr["Descripcion"].ToString(),
-        //                            activo = Convert.ToBoolean(dr["Activo"])
-        //                        });
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        lista = new List<EN_CategoriaHerramienta>();
-        //    }
-
-        //    return lista;
-        //}
 
         public int Registrar(EN_CategoriaHerramienta obj, out string Mensaje)//out indica parametro de salida
         {
@@ -218,167 +184,173 @@ namespace CapaDatos
             return resultado;
         }
 
-        //public byte[] GenerarPDF() //public ActionResult DescargarPdfCategoria<T>(List<T> oLista)
-        //{
-        //    List<EN_CategoriaHerramienta> oLista = new List<EN_CategoriaHerramienta>();
+        public byte[] GenerarPDF() //public ActionResult DescargarPdfCategoria<T>(List<T> oLista)
+        {
+            List<EN_CategoriaHerramienta> oLista = new List<EN_CategoriaHerramienta>();
 
-        //    //oLista = new RN_Categoria().Listar();
-        //    oLista = new BD_CategoriaHerramienta().Listar();
+            //oLista = new RN_Categoria().Listar();
+            oLista = new BD_CategoriaHerramienta().Listar();
 
-        //    var data = Document.Create(document =>
-        //    {
-        //        document.Page(page =>
-        //        {
-        //            // page content
-        //            page.Margin(30);
-        //            // page.Header().Height(100).Background(Colors.Blue.Medium);
-        //            page.Header().ShowOnce().Row(row =>
-        //            {//el ShowOnce sirve para que el header solo aparezca en la primera hoja
-        //             //D:\ConsolePdf\ExportarPdf_Web\Content\images\cuborubikcode.png
-        //                var rutaImagen = Path.Combine("D:\\ConsolePdf\\ExportarPdf_Web\\Content\\images\\cuborubikcode.png");
+            var data = Document.Create(document =>
+            {
+                document.Page(page =>
+                {
+                    // page content
+                    page.Margin(30);
+                    // page.Header().Height(100).Background(Colors.Blue.Medium);
+                    page.Header().ShowOnce().Row(row =>
+                    {//el ShowOnce sirve para que el header solo aparezca en la primera hoja
+                     //D:\ConsolePdf\ExportarPdf_Web\Content\images\cuborubikcode.png
+                     //C:\Users\david\OneDrive\Documents\Proyectos Programacion\SIGUP\SIGUP\SistemaWeb_UnidadPracticas\images
+                     //var rutaImagen = Path.Combine("images", "computadora.jpg");
 
-        //                byte[] imageData = System.IO.File.ReadAllBytes(rutaImagen);
+                        var rutaImagen = Path.Combine("C:\\images\\itssnp.png");
+                        //var rutaImagen = Path.Combine("C:\\Users\\david\\OneDrive\\Documents\\Proyectos Programacion\\SIGUP\\SIGUP\\SistemaWeb_UnidadPracticas\\images\\computadora.jpg");
 
-        //                row.ConstantItem(150).Image(imageData);
+                        byte[] imageData = System.IO.File.ReadAllBytes(rutaImagen);
 
-        //                //row.ConstantItem(140).Height(60).Placeholder();//Elegimos el ancho del item
+                        row.ConstantItem(150).Image(imageData);
 
-        //                row.RelativeItem().Column(col =>//El ancho se coloca relativamente automatica
-        //                {
-        //                    col.Item().AlignCenter().Text("Biblioteca: Luis Cabrera").Bold().FontSize(14);
-        //                    col.Item().AlignCenter().Text("Puebla, Puebla").Bold().FontSize(9);
-        //                    col.Item().AlignCenter().Text("123 456 7890").Bold().FontSize(9);
-        //                    col.Item().AlignCenter().Text("example@gmail.com").Bold().FontSize(9);
-        //                    //col.Item().Background(Colors.Orange.Medium).Height(10);
-        //                    //col.Item().Background(Colors.Green.Medium).Height(10);
-        //                });
-        //                row.RelativeItem().Column(col =>
-        //                {
-        //                    col.Item().Border(1).BorderColor("#257272").
-        //                   AlignCenter().Text("Biblioteca");
+                        //row.ConstantItem(140).Height(60).Placeholder();//Elegimos el ancho del item
 
-        //                    col.Item().Background("#257272").Border(1)
-        //                    .BorderColor("#257272").AlignCenter()
-        //                    .Text("Categorias").FontColor("#fff");
+                        row.RelativeItem().Column(col =>//El ancho se coloca relativamente automatica
+                        {
+                            col.Item().AlignCenter().Text("Unidad de Prácticas").Bold().FontSize(14);
+                            col.Item().AlignCenter().Text("ITSSNP - SIGUP").Bold().FontSize(9);
+                            col.Item().AlignCenter().Text("Sistema de Gestión y Control").Bold().FontSize(9);
+                            col.Item().AlignCenter().Text("de Préstamos y Laboratorios").Bold().FontSize(9);
+                            //col.Item().Background(Colors.Orange.Medium).Height(10);
+                            //col.Item().Background(Colors.Green.Medium).Height(10);
+                        });
+                        row.RelativeItem().Column(col =>
+                        {
+                            //verde institucional 91B22C
+                            //azul institucional 1B396A
+                            col.Item().Border(1).BorderColor("#1B396A").
+                           AlignCenter().Text("SIGUP").Bold();
 
-        //                    col.Item().Border(1).BorderColor("#257272").
-        //                    AlignCenter().Text(DateTime.Now.ToString("dd-MM-yyyy"));
+                            col.Item().Background("#1B396A").Border(1)
+                            .BorderColor("#1B396A").AlignCenter()
+                            .Text("Categorías").FontColor("#fff");
 
-        //                });
+                            col.Item().Border(1).BorderColor("#1B396A").
+                            AlignCenter().Text(DateTime.Now.ToString("dd-MM-yyyy"));
 
-        //            });
+                        });
 
-        //            // page.Content().Background(Colors.Yellow.Medium);
-        //            page.Content().PaddingVertical(10).Column(col1 =>
-        //            {
-        //                col1.Item().Column(col2 =>//Columna de datos de usuario
-        //                {
-        //                    col2.Item().Text("Datos del Usuario").Underline().Bold();
+                    });
 
-        //                    col2.Item().Text(txt =>
-        //                    {
-        //                        txt.Span("Nombre: ").SemiBold().FontSize(10);
-        //                        txt.Span("David Nava").FontSize(10);
-        //                    });
+                    // page.Content().Background(Colors.Yellow.Medium);
+                    page.Content().PaddingVertical(10).Column(col1 =>
+                    {
+                        //col1.Item().Column(col2 =>//Columna de datos de usuario
+                        //{
+                        //    col2.Item().Text("Datos del Usuario").Underline().Bold();
 
-        //                    col2.Item().Text(txt =>
-        //                    {
-        //                        txt.Span("DNI: ").SemiBold().FontSize(10);
-        //                        txt.Span("0877625727").FontSize(10);
-        //                    });
+                        //    col2.Item().Text(txt =>
+                        //    {
+                        //        txt.Span("Nombre: ").SemiBold().FontSize(10);
+                        //        txt.Span("David Nava").FontSize(10);
+                        //    });
 
-        //                    col2.Item().Text(txt =>
-        //                    {
-        //                        txt.Span("Dirección: ").SemiBold().FontSize(10);
-        //                        txt.Span("Calle Luis Cabrera S/N").FontSize(10);
-        //                    });
-        //                });
+                        //    col2.Item().Text(txt =>
+                        //    {
+                        //        txt.Span("DNI: ").SemiBold().FontSize(10);
+                        //        txt.Span("0877625727").FontSize(10);
+                        //    });
 
-        //                int totalCategorias = 0;
-        //                col1.Item().LineHorizontal(0.5f);
-        //                col1.Item().Table(tabla =>
-        //                {//Seccion de la tabla
-        //                    tabla.ColumnsDefinition(columns =>
-        //                    {
-        //                        //columns.RelativeColumn(3);
-        //                        columns.ConstantColumn(100);
-        //                        //columns.RelativeColumn();
-        //                        columns.RelativeColumn();
-        //                        //columns.RelativeColumn();
-        //                        columns.ConstantColumn(100);
-        //                    });
+                        //    col2.Item().Text(txt =>
+                        //    {
+                        //        txt.Span("Dirección: ").SemiBold().FontSize(10);
+                        //        txt.Span("Calle Luis Cabrera S/N").FontSize(10);
+                        //    });
+                        //});
 
-        //                    tabla.Header(header =>
-        //                    {
-        //                        header.Cell().Background("#257272")
-        //                         .Padding(2).Text("Código").FontColor("#fff");
+                        int totalCategorias = 0;
+                        col1.Item().LineHorizontal(0.5f);
+                        col1.Item().Table(tabla =>
+                        {//Seccion de la tabla
+                            tabla.ColumnsDefinition(columns =>
+                            {
+                                //columns.RelativeColumn(3);
+                                columns.ConstantColumn(100);
+                                //columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                //columns.RelativeColumn();
+                                columns.ConstantColumn(100);
+                            });
 
-        //                        header.Cell().Background("#257272")
-        //                        .Padding(2).Text("Descripción").FontColor("#fff");
+                            tabla.Header(header =>
+                            {
+                                header.Cell().Background("#1B396A")
+                                 .Padding(2).Text("Código").FontColor("#fff");
 
-        //                        header.Cell().Background("#257272")
-        //                        .Padding(2).Text("Activo").FontColor("#fff");
-        //                    });
+                                header.Cell().Background("#1B396A")
+                                .Padding(2).Text("Categoría").FontColor("#fff");
 
-        //                    foreach (EN_CategoriaHerramienta cat in oLista)
-        //                    //foreach (var item in Enumerable.Range(1, 45))
-        //                    {
+                                header.Cell().Background("#1B396A")
+                                .Padding(2).Text("Activo").FontColor("#fff");
+                            });
 
-        //                        tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
-        //                        .Padding(2).Text(cat.IdCategoria.ToString()).FontSize(10);
+                            foreach (EN_CategoriaHerramienta cat in oLista)
+                            //foreach (var item in Enumerable.Range(1, 45))
+                            {
 
-        //                        tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
-        //                        .Padding(2).Text(cat.Descripcion).FontSize(10);
+                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
+                                .Padding(2).Text(cat.idCategoria.ToString()).FontSize(10);
 
-        //                        if (cat.Activo)
-        //                        {
-        //                            tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
-        //                            .Padding(2).Text("Sí").FontSize(10);
-        //                        }
-        //                        else
-        //                        {
-        //                            tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
-        //                            .Padding(2).Text("No").FontSize(10);
-        //                        }
-        //                        totalCategorias++;
-        //                    }
+                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
+                                .Padding(2).Text(cat.descripcion).FontSize(10);
+
+                                if (cat.activo)
+                                {
+                                    tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
+                                    .Padding(2).Text("Sí").FontSize(10).FontColor("#157347");
+                                }
+                                else
+                                {
+                                    tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9")
+                                    .Padding(2).Text("No").FontSize(10).FontColor("#BB2D3B");
+                                }
+                                totalCategorias++;
+                            }
 
 
-        //                });
+                        });
 
-        //                col1.Item().AlignRight().Text($"Total de categorias: {totalCategorias}").FontSize(12);
+                        col1.Item().AlignRight().Text($"Total de categorias: {totalCategorias}").FontSize(12);
 
-        //                //col1.Item().Background(Colors.Grey.Lighten3).Padding(10)//Seccion de comentarios
-        //                //.Column(column =>
-        //                //{
-        //                //    column.Item().Text("Comentarios").FontSize(14);
-        //                //    column.Item().Text(Placeholders.LoremIpsum());
-        //                //    column.Spacing(5);
-        //                //});
+                        //col1.Item().Background(Colors.Grey.Lighten3).Padding(10)//Seccion de comentarios
+                        //.Column(column =>
+                        //{
+                        //    column.Item().Text("Comentarios").FontSize(14);
+                        //    column.Item().Text(Placeholders.LoremIpsum());
+                        //    column.Spacing(5);
+                        //});
 
-        //                col1.Spacing(10);
-        //            });
+                        col1.Spacing(10);
+                    });
 
-        //            page.Footer()
-        //            .AlignRight()
-        //            .Text(txt =>
-        //            {
-        //                txt.Span("Pagina ").FontSize(10);
-        //                txt.CurrentPageNumber().FontSize(10);
+                    page.Footer()
+                    .AlignRight()
+                    .Text(txt =>
+                    {
+                        txt.Span("Pagina ").FontSize(10);
+                        txt.CurrentPageNumber().FontSize(10);
 
-        //                txt.Span(" de ").FontSize(10);
-        //                txt.TotalPages().FontSize(10);
-        //            });
-        //            //page.Footer().Height(50).Background(Colors.Red.Medium);
-        //        });
-        //    }).GeneratePdf();
+                        txt.Span(" de ").FontSize(10);
+                        txt.TotalPages().FontSize(10);
+                    });
+                    //page.Footer().Height(50).Background(Colors.Red.Medium);
+                });
+            }).GeneratePdf();
 
-        //    MemoryStream stream = new MemoryStream(data);
-        //    //return stream.
-        //    return stream.ToArray();
-        //    //return File(stream, "applicacion/pdf", "detallePrestamo.pdf");
-        //    //return View();
-        //}
+            MemoryStream stream = new MemoryStream(data);
+            //return stream.
+            return stream.ToArray();
+            //return File(stream, "applicacion/pdf", "detallePrestamo.pdf");
+            //return View();
+        }
 
 
 

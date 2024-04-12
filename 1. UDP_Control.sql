@@ -43,7 +43,7 @@ Go
 
 create table Areas
 (
-IdArea int primary key not null, 
+IdArea int identity primary key not null, 
 NombreArea varchar(60) not null, 
 IdEdificio int constraint FK_Edificio foreign key (IdEdificio) references Edificio(IdEdificio) not null 
 );
@@ -126,6 +126,6 @@ Create Table Bitacora
 IdPractica int identity(1,1) primary key not null,
 NombreActividad varchar(100) not null,  
 IdRegistro int constraint FK_ControlUsuario foreign key (IdRegistro) references ControlUsuario(IdRegistro) not null,
-Observaciones varchar(150) not null
+Observaciones varchar(150)
 );
 Go

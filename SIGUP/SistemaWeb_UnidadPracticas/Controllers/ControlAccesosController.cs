@@ -16,6 +16,10 @@ namespace SistemaWeb_UnidadPracticas.Controllers
         {
             return View();
         }
+        public ActionResult Dash()
+        {
+            return View();
+        }
         public ActionResult Accesos()
         {
             return View();
@@ -24,7 +28,22 @@ namespace SistemaWeb_UnidadPracticas.Controllers
         {
             return View();
         }
-
+        public ActionResult Areas()
+        {
+            return View();
+        }
+        public ActionResult Edificios()
+        {
+            return View();
+        }
+        public ActionResult Actividades()
+        {
+            return View();
+        }
+        public ActionResult Bitacora()
+        {
+            return View();
+        }
         /*--------------Control de Accesos--------------------*/
         #region Control de Accesos
         [HttpGet]
@@ -256,6 +275,66 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region Bitácora
+        [HttpGet]
+        public JsonResult ListarBitacora()
+        {
+            List<EN_Bitacora> oLista = new List<EN_Bitacora>();
+            oLista = new RN_BitacoraAula().RN_ListarBitacora();
 
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+
+
+        }
+        [HttpGet]
+        public JsonResult ListarAccesosBitacora()
+        {
+            List<EN_ControlAccesos> oLista = new List<EN_ControlAccesos>();
+            oLista = new RN_BitacoraAula().RN_ListarAccesosBitacora();
+
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult Guardarbit(EN_Bitacora accessbit)
+        {
+            object resultado;
+            string mensaje = string.Empty;
+
+            if (accessbit.IdPractica == 0)
+            {
+                resultado = new RN_BitacoraAula().GuardarBit(accessbit, out mensaje);
+            }
+            else
+            {
+                resultado = new RN_BitacoraAula().EditarBit(accessbit, out mensaje);
+            }
+
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult EliminarBit(int id)
+        {
+            bool respuesta = false;
+            string mensaje = string.Empty;
+
+            respuesta = new RN_BitacoraAula().EliminarRegBit(id, out mensaje);
+
+            return Json(new { resultado = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        public ActionResult DescargarPDF_ControlAccesos()
+        {
+            // Llama al método de la capa de negocios para generar el PDF
+            byte[] pdf = new RN_ControlAccesos().GenerarPDF();
+            // Devolver el PDF como una descarga al usuario
+            return File(pdf, "application/pdf", "Control_Accesos_" + DateTime.Now.ToString() + ".pdf");
+        }
+        public ActionResult DescargarPDF_Bitacora()
+        {
+            // Llama al método de la capa de negocios para generar el PDF
+            byte[] pdf = new RN_BitacoraAula().GenerarPDF();
+            // Devolver el PDF como una descarga al usuario
+            return File(pdf, "application/pdf", "Bitácora_" + DateTime.Now.ToString() + ".pdf");
+        }
     }
 }

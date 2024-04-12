@@ -47,7 +47,7 @@ namespace CapaDatos
             }
             return lista;
         }
-        public int añadir_edifcio(EN_Edificio edificio, out string Mensaje)
+        public int añadir_edificio(EN_Edificio edificio, out string Mensaje)
         {
             int IdAutogenerado = 0; /*Recibe el id autogenerado*/
 

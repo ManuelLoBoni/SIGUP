@@ -114,6 +114,28 @@
                                     <div class="sb-nav-link-icon"><i class="fas fa-laptop-house"></i></div>
                                     Bitácora
                                 </a>
+                                <a class="nav-link" href="@Url.Action("Actividades", "ControlAccesos")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-laptop-house"></i></div>
+                                    Actividades
+                                </a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdminAreas" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-reader"></i></div>
+                            Áreas
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseAdminAreas">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="@Url.Action("Areas", "ControlAccesos")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                                    Áreas
+                                </a>
+                                <a class="nav-link" href="@Url.Action("Edificios", "ControlAccesos")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-laptop-house"></i></div>
+                                    Edificios
+                                </a>
                             </nav>
                         </div>
                     </div>
