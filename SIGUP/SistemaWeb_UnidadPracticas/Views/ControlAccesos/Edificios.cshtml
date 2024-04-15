@@ -91,7 +91,7 @@
             responsive: true,/*Para que sea resposiva*/
             ordering: true,
             "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
-                url: '@Url.Action("ListarEdificiosCU", "ControlAccesos")',
+                url: '@Url.Action("ListarEdificiosCA", "ControlAccesos")',
                 type: "GET",
                 dataType: "json"
             },
@@ -140,7 +140,6 @@
 
         $("#tabla tbody").on("click", '.btn-editar', function () {
             var json = $(this).data("informacion")
-            console.log(json)
             abrirModal(json)
         })
 
@@ -161,7 +160,7 @@
             function (isConfirm) {
             if (isConfirm) {
                 jQuery.ajax({
-                url: '@Url.Action("EliminarEdificiosCU", "ControlAccesos")',
+                url: '@Url.Action("EliminarEdificiosCA", "ControlAccesos")',
                 type: "POST",
                     data: JSON.stringify({ id: json.idEdificio }),
                 dataType: "json",
@@ -193,7 +192,7 @@
                 nombreEdificio: $("#txtEdificio").val(),
             }
                 jQuery.ajax({
-                url: '@Url.Action("GuardarEdificiosCU", "ControlAccesos")',
+                url: '@Url.Action("GuardarEdificiosCA", "ControlAccesos")',
                     type: "POST",
                     data: JSON.stringify({ edificio: Registro }), // el accesos es el parametro del metodo del controlador, el otro es la variable
                 dataType: "json",

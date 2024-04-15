@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1EF5C0B0-9D20-4BEF-BE97-505190D6D850}|SistemaWeb_UnidadPracticas\\SistemaWeb_UnidadPracticas.csproj|c:\\users\\lopez\\archdata\\github\\sigup\\sigup\\sistemaweb_unidadpracticas\\views\\controlaccesos\\bitacora.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1EF5C0B0-9D20-4BEF-BE97-505190D6D850}|SistemaWeb_UnidadPracticas\\SistemaWeb_UnidadPracticas.csproj|solutionrelative:sistemaweb_unidadpracticas\\views\\controlaccesos\\bitacora.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1EF5C0B0-9D20-4BEF-BE97-505190D6D850}|SistemaWeb_UnidadPracticas\\SistemaWeb_UnidadPracticas.csproj|c:\\users\\lopez\\archdata\\github\\sigup\\sigup\\sistemaweb_unidadpracticas\\controllers\\controlaccesoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1EF5C0B0-9D20-4BEF-BE97-505190D6D850}|SistemaWeb_UnidadPracticas\\SistemaWeb_UnidadPracticas.csproj|solutionrelative:sistemaweb_unidadpracticas\\controllers\\controlaccesoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB918AF3-500D-4E23-882B-EB85E0C35A71}|CapaDatos\\CapaDatos.csproj|c:\\users\\lopez\\archdata\\github\\sigup\\sigup\\capadatos\\bd_controlaccesos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB918AF3-500D-4E23-882B-EB85E0C35A71}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\bd_controlaccesos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB918AF3-500D-4E23-882B-EB85E0C35A71}|CapaDatos\\CapaDatos.csproj|c:\\users\\lopez\\archdata\\github\\sigup\\sigup\\capadatos\\bd_bitacora.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB918AF3-500D-4E23-882B-EB85E0C35A71}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\bd_bitacora.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +26,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ControlAccesosController.cs",
               "DocumentMoniker": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\SistemaWeb_UnidadPracticas\\Controllers\\ControlAccesosController.cs",
               "RelativeDocumentMoniker": "SistemaWeb_UnidadPracticas\\Controllers\\ControlAccesosController.cs",
               "ToolTip": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\SistemaWeb_UnidadPracticas\\Controllers\\ControlAccesosController.cs",
               "RelativeToolTip": "SistemaWeb_UnidadPracticas\\Controllers\\ControlAccesosController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAeAAAA",
+              "ViewState": "AQIAAB0BAAAAAAAAAAAgwCYBAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-12T04:51:33.58Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Bitacora.cshtml",
+              "DocumentMoniker": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\SistemaWeb_UnidadPracticas\\Views\\ControlAccesos\\Bitacora.cshtml",
+              "RelativeDocumentMoniker": "SistemaWeb_UnidadPracticas\\Views\\ControlAccesos\\Bitacora.cshtml",
+              "ToolTip": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\SistemaWeb_UnidadPracticas\\Views\\ControlAccesos\\Bitacora.cshtml",
+              "RelativeToolTip": "SistemaWeb_UnidadPracticas\\Views\\ControlAccesos\\Bitacora.cshtml",
+              "ViewState": "AQIAAB0BAAAAAAAAAAAAADABAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-15T02:56:27.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BD_ControlAccesos.cs",
+              "DocumentMoniker": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\CapaDatos\\BD_ControlAccesos.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\BD_ControlAccesos.cs",
+              "ToolTip": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\CapaDatos\\BD_ControlAccesos.cs",
+              "RelativeToolTip": "CapaDatos\\BD_ControlAccesos.cs",
+              "ViewState": "AQIAAHgAAAAAAAAAAAAgwIwAAACDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T02:52:49.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BD_Bitacora.cs",
+              "DocumentMoniker": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\CapaDatos\\BD_Bitacora.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\BD_Bitacora.cs",
+              "ToolTip": "C:\\Users\\lopez\\ArchData\\Github\\SIGUP\\SIGUP\\CapaDatos\\BD_Bitacora.cs",
+              "RelativeToolTip": "CapaDatos\\BD_Bitacora.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwEwAAABoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T02:52:48.447Z",
               "EditorCaption": ""
             }
           ]

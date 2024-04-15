@@ -100,7 +100,7 @@
     <script>
          //Variables Globales
         var tabladata;
-
+        var editar = 0;
          //----------------------------------------TABLA-------------------------------------------------
          //Aqui se encuentra el cuerpo de la tabla
 
@@ -168,38 +168,71 @@
         });
 
         //----------------------------------------ComboBox-------------------------------------------------
-        jQuery.ajax({
-          url: '@Url.Action("ListarAccesosBitacora", "ControlAccesos")',
-          type: "GET",
-          data: null,
-          dataType: "json",
-          contentType: "application/json; charset=utf-8",
-          success: function (data) {
-            $("#comboregistro").append(
-              $("<option selected>")
-                .val("")
-                .attr({ value: "0", disabled: "true" })
-                .text("Selecciona el acceso correcto...")
-            );
-            $.each(data.data, function (index, item) {
-              $("<option>")
-                .attr({ value: item.IdRegistro })
-                .text(
-                  item.fecha +
-                    " - " +
-                    item.HoraEntrada +
-                    " - " +
-                    item.E_IdUsuario.NombreCompletoUsuario
-                )
-                .appendTo("#comboregistro");
-            });
-          },
-        });
-
+        function listarAccesos() {
+            jQuery.ajax({
+              url: '@Url.Action("ListarAccesosBitacora", "ControlAccesos")',
+              type: "GET",
+              data: null,
+              dataType: "json",
+              contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#comboregistro").empty();
+                $("#comboregistro").append(
+                  $("<option selected>")
+                    .val("")
+                    .attr({ value: "0", disabled: "true" })
+                    .text("Selecciona el acceso correcto...")
+                );
+                $.each(data.data, function (index, item) {
+                  $("<option>")
+                    .attr({ value: item.IdRegistro })
+                    .text(
+                      item.fecha +
+                        " - " +
+                        item.HoraEntrada +
+                        " - " +
+                        item.E_IdUsuario.NombreCompletoUsuario
+                    )
+                    .appendTo("#comboregistro");
+                });
+              },
+            })
+        }
+        function listarEditar() {
+            jQuery.ajax({
+              url: '@Url.Action("ListarEditarBitacora", "ControlAccesos")',
+              type: "GET",
+              data: null,
+              dataType: "json",
+              contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#comboregistro").empty();
+                $("#comboregistro").append(
+                  $("<option selected>")
+                    .val("")
+                    .attr({ value: "0", disabled: "true" })
+                    .text("Selecciona el acceso correcto...")
+                );
+                $.each(data.data, function (index, item) {
+                  $("<option>")
+                    .attr({ value: item.IdRegistro })
+                    .text(
+                      item.fecha +
+                        " - " +
+                        item.HoraEntrada +
+                        " - " +
+                        item.E_IdUsuario.NombreCompletoUsuario
+                    )
+                    .appendTo("#comboregistro");
+                });
+              },
+            })
+        }
                 /*--------------- Al dar clic en el boton de editar-------------------------------*/
 
                 $("#tabla tbody").on("click", ".btn-editar", function () {
                     var json = $(this).data("informacion");
+                    editar = 1;
                     abrirModal(json);
                 });
 
@@ -256,7 +289,7 @@
           $("#txtId").val(0);
           $("#txtActividad").val("");
             $("#comboregistro").val($("#comboregistro option:first").val());
-          $("#txtObservaciones").val();
+          $("#txtObservaciones").val("");
 
           $("#mensajeError").hide();
           //La siguiente validacion es por que el modal sirve para guardar y editar, entonces al abrir trae la informacion dependiendo del boton.
@@ -265,8 +298,13 @@
             $("#txtActividad").val(json.NombreActividad);
               $("#comboregistro").val(json.E_ControlAccesos.IdRegistro);
             $("#txtObservaciones").val(json.Observaciones);
-          }
-
+            }
+            if (editar) {
+                listarEditar()
+            } else {
+                listarAccesos()
+            }
+            editar = 0;
           $("#FormModal").modal("show");
         }
 

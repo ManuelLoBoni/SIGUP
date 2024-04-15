@@ -91,7 +91,7 @@
             responsive: true,/*Para que sea resposiva*/
             ordering: true,
             "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
-                url: '@Url.Action("ListarActividadCU", "ControlAccesos")',
+                url: '@Url.Action("ListarActividadCA", "ControlAccesos")',
                 type: "GET",
                 dataType: "json"
             },
@@ -160,7 +160,7 @@
             function (isConfirm) {
             if (isConfirm) {
                 jQuery.ajax({
-                url: '@Url.Action("EliminarActividadesCU", "ControlAccesos")',
+                url: '@Url.Action("EliminarActividadesCA", "ControlAccesos")',
                 type: "POST",
                     data: JSON.stringify({ id: json.IdActividad }),
                 dataType: "json",
@@ -192,7 +192,7 @@
                 NombreActividad: $("#txtActividad").val(),
             }
                 jQuery.ajax({
-                url: '@Url.Action("GuardarActividadesCU", "ControlAccesos")',
+                url: '@Url.Action("GuardarActividadesCA", "ControlAccesos")',
                     type: "POST",
                     data: JSON.stringify({ actividad: Registro }), // el accesos es el parametro del metodo del controlador, el otro es la variable
                 dataType: "json",

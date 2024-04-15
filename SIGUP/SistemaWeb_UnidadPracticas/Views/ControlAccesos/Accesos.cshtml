@@ -158,7 +158,7 @@
 
                     <div class="col-sm-6">
                         <label class="form-label fw-bold">Hora de Salida</label>
-                        <input type="time" class="form-control text-success" id="txtHSalidaCUP" autocomplete="off">
+                        <input type="time" class="form-control text-success" id="txtHSalidaCAP" autocomplete="off">
                     </div>
 
                 </div>
@@ -294,7 +294,7 @@
         });
         //----------------------------------------ComboBox-------------------------------------------------
         jQuery.ajax({
-            url: '@Url.Action("ListarCarrerasCU","ControlAccesos")',
+            url: '@Url.Action("ListarCarrerasCA","ControlAccesos")',
             type: "GET",
             data: null,
             dataType: "json",
@@ -308,7 +308,7 @@
         });
 
         jQuery.ajax({
-            url: '@Url.Action("ListarActividadCU", "ControlAccesos")',
+            url: '@Url.Action("ListarActividadCA", "ControlAccesos")',
             type: "GET",
             data: null,
             dataType: "json",
@@ -322,7 +322,7 @@
         });
 
           jQuery.ajax({
-            url: '@Url.Action("ListarUsuarioCU", "ControlAccesos")',
+            url: '@Url.Action("ListarUsuarioCA", "ControlAccesos")',
             type: "GET",
             data: null,
             dataType: "json",
@@ -339,7 +339,7 @@
           });
 
            jQuery.ajax({
-            url: '@Url.Action("ListarAreaParaCU", "ControlAccesos")',
+            url: '@Url.Action("ListarAreaParaCA", "ControlAccesos")',
             type: "GET",
             data: null,
             dataType: "json",
@@ -398,11 +398,11 @@
                 $("#txtFechaCUP").val(json.fecha).attr({ "disabled": "disabled" });
                 $("#txtUsuarioCUP").val(json.E_IdUsuario.NombreCompletoUsuario).attr({ "disabled": "disabled" });
                 $("#txtHEntradaCUP").val(moment(json.HoraEntrada, 'HH:mm:ss').format('HH:mm')).attr({ "disabled": "disabled" });
-                $("#txtHSalidaCUP").val(json.HoraSalida); 
+                $("#txtHSalidaCAP").val(json.HoraSalida); 
                 if (json.HoraSalida != "") {
-                    $("#txtHSalidaCUP").val(json.HoraSalida);
+                    $("#txtHSalidaCAP").val(json.HoraSalida);
                 } else {
-                    $("#txtHSalidaCUP").val(horaActual);
+                    $("#txtHSalidaCAP").val(horaActual);
                 }
 
             }
@@ -439,19 +439,16 @@
             function (isConfirm) {
             if (isConfirm) {
                 jQuery.ajax({
-                url: '@Url.Action("EliminarrCU", "ControlAccesos")',
+                url: '@Url.Action("EliminarRCA", "ControlAccesos")',
                 type: "POST",
                     data: JSON.stringify({ id: json.IdRegistro }),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-
                     if (data.resultado) {
-                        console.log("Entro")
                         swal("¡Eliminado!", "El registro ha sido eliminado correctamente", "success")
                         tabladata.ajax.reload()
                     } else {
-                        console.log("Entro al error")
                         swal("¡Error!", data.mensaje, "error")
                     }
                 },
@@ -493,7 +490,7 @@
                 },
             }
                 jQuery.ajax({
-                url: '@Url.Action("GuardarRCU", "ControlAccesos")',
+                url: '@Url.Action("GuardarRCA", "ControlAccesos")',
                     type: "POST",
                     data: JSON.stringify({ accesos: Registro }), // el accesos es el parametro del metodo del controlador, el otro es la variable
                 dataType: "json",
@@ -545,10 +542,10 @@
 
         var HSalida = {
             IdRegistro: $("#txtId2").val(),
-            HoraSalida: $("#txtHSalidaCUP").val(),
+            HoraSalida: $("#txtHSalidaCAP").val(),
         }
             jQuery.ajax({
-            url: '@Url.Action("SalidaCU", "ControlAccesos")',
+            url: '@Url.Action("SalidaCA", "ControlAccesos")',
                 type: "POST",
                 data: JSON.stringify({ salida: HSalida }), // el salida es el parametro del metodo del controlador, el otro es la variable
             dataType: "json",

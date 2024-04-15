@@ -20,6 +20,10 @@ namespace CapaNegocio
         {
             return ControlAccesos.ListarAccesosParaBitacora();
         }
+        public List<EN_ControlAccesos> RN_ListarEditar()
+        {
+            return ControlAccesos.ListarEditarParaBitacora();
+        }
 
         public bool EliminarRegBit(int id, out string mensaje)
         {
@@ -34,7 +38,7 @@ namespace CapaNegocio
             }
             else if (registroBit.E_ControlAccesos.IdRegistro == 0)
             {
-                mensaje = "Selecciona un registro.";
+                mensaje = "Selecciona un acceso.";
             }
             if (string.IsNullOrEmpty(mensaje))
             {
@@ -55,7 +59,7 @@ namespace CapaNegocio
             }
             else if (registroBit.E_ControlAccesos.IdRegistro == 0)
             {
-                mensaje = "Realiza el registro correcto.";
+                mensaje = "Selecciona un acceso.";
             }
 
             if (string.IsNullOrEmpty(mensaje))

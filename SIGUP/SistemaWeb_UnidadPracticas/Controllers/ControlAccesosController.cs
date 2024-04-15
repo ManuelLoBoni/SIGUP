@@ -54,8 +54,15 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ListarUsuarioCA()
+        {
+            List<EN_Usuario> oLista = new List<EN_Usuario>();
+            oLista = new RN_Usuarios().ListarUsuarioParaCU();
+
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
-        public JsonResult GuardarRCU(EN_ControlAccesos accesos)
+        public JsonResult GuardarRCA(EN_ControlAccesos accesos)
         {
             object resultado;
             string mensaje = string.Empty;
@@ -72,7 +79,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult SalidaCU(EN_ControlAccesos salida)
+        public JsonResult SalidaCA(EN_ControlAccesos salida)
         {
             object resultado;
             string mensaje = string.Empty;
@@ -82,7 +89,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult EliminarrCU(int id)
+        public JsonResult EliminarRCA(int id)
         {
             bool respuesta = false;
             string mensaje = string.Empty;
@@ -97,7 +104,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         #region Carreras
         [HttpGet]
-        public JsonResult ListarCarrerasCU()
+        public JsonResult ListarCarrerasCA()
         {
             List<EN_Carrera> oLista = new List<EN_Carrera>();
             oLista = new RN_Carrera().ListarCarreras();
@@ -105,7 +112,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult GuardarCarreraCU(EN_Carrera carrera)
+        public JsonResult GuardarCarreraCA(EN_Carrera carrera)
         {
             object resultado;
             string mensaje = string.Empty;
@@ -123,7 +130,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         }
         [HttpPost]
-        public JsonResult EliminarCarreraCU(int id)
+        public JsonResult EliminarCarreraCA(int id)
         {
             bool respuesta = false;
             string mensaje = string.Empty;
@@ -137,7 +144,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         #region Edificio
         [HttpGet]
-        public JsonResult ListarEdificiosCU()
+        public JsonResult ListarEdificiosCA()
         {
             List<EN_Edificio> oLista = new List<EN_Edificio>();
             oLista = new RN_Edificio().ListarEdificios();
@@ -145,7 +152,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult GuardarEdificiosCU(EN_Edificio edificio)
+        public JsonResult GuardarEdificiosCA(EN_Edificio edificio)
         {
             object resultado;
             string mensaje = string.Empty;
@@ -163,7 +170,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         }
         [HttpPost]
-        public JsonResult EliminarEdificiosCU(int id)
+        public JsonResult EliminarEdificiosCA(int id)
         {
             bool respuesta = false;
             string mensaje = string.Empty;
@@ -176,9 +183,8 @@ namespace SistemaWeb_UnidadPracticas.Controllers
         #endregion
 
         #region Areas
-
         [HttpGet] /*Una URL que devuelve datos, un httpost se le pasan los valores y despues devuelve los datos  */
-        public JsonResult ListarAreaParaCU() /*D este json se puede controlar que mas ver, igualar elementos, etc*/
+        public JsonResult ListarAreaParaCA() /*D este json se puede controlar que mas ver, igualar elementos, etc*/
         {
             List<EN_Area> oLista = new List<EN_Area>();
             oLista = new RN_Area().ListarAreaParaPrestamo();
@@ -186,7 +192,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             /*El json da los datos, jala los datos de esa lista, en data*/
         }
         [HttpGet] /*Una URL que devuelve datos, un httpost se le pasan los valores y despues devuelve los datos  */
-        public JsonResult ListarAreaCCU() /*D este json se puede controlar que mas ver, igualar elementos, etc*/
+        public JsonResult ListarAreaCA() /*D este json se puede controlar que mas ver, igualar elementos, etc*/
         {
             List<EN_Area> oLista = new List<EN_Area>();
             oLista = new RN_Area().ListarAreaCompleta();
@@ -194,7 +200,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             /*El json da los datos, jala los datos de esa lista, en data*/
         }
         [HttpPost]
-        public JsonResult GuardarAreasCU(EN_Area area)
+        public JsonResult GuardarAreasCA(EN_Area area)
         {
             object resultado;
             string mensaje = string.Empty;
@@ -212,7 +218,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         }
         [HttpPost]
-        public JsonResult EliminarAreasCU(int id)
+        public JsonResult EliminarAreasCA(int id)
         {
             bool respuesta = false;
             string mensaje = string.Empty;
@@ -227,7 +233,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         #region Actividades
         [HttpGet]
-        public JsonResult ListarActividadCU()
+        public JsonResult ListarActividadCA()
         {
             List<EN_TipoActividad> oLista = new List<EN_TipoActividad>();
             oLista = new RN_TipoActividad().ListarTipoActividad();
@@ -235,7 +241,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult GuardarActividadesCU(EN_TipoActividad actividad)
+        public JsonResult GuardarActividadesCA(EN_TipoActividad actividad)
         {
             object resultado;
             string mensaje = string.Empty;
@@ -253,7 +259,7 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         }
         [HttpPost]
-        public JsonResult EliminarActividadesCU(int id)
+        public JsonResult EliminarActividadesCA(int id)
         {
             bool respuesta = false;
             string mensaje = string.Empty;
@@ -266,15 +272,6 @@ namespace SistemaWeb_UnidadPracticas.Controllers
 
         #endregion
 
-        #region Metodos Listar
-        public JsonResult ListarUsuarioCU()
-        {
-            List<EN_Usuario> oLista = new List<EN_Usuario>();
-            oLista = new RN_Usuarios().ListarUsuarioParaCU();
-
-            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
-        }
-        #endregion
         #region Bitácora
         [HttpGet]
         public JsonResult ListarBitacora()
@@ -291,6 +288,14 @@ namespace SistemaWeb_UnidadPracticas.Controllers
         {
             List<EN_ControlAccesos> oLista = new List<EN_ControlAccesos>();
             oLista = new RN_BitacoraAula().RN_ListarAccesosBitacora();
+
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListarEditarBitacora()
+        {
+            List<EN_ControlAccesos> oLista = new List<EN_ControlAccesos>();
+            oLista = new RN_BitacoraAula().RN_ListarEditar();
 
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
@@ -322,6 +327,8 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             return Json(new { resultado = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Generar PDF
         public ActionResult DescargarPDF_ControlAccesos()
         {
             // Llama al método de la capa de negocios para generar el PDF
@@ -336,5 +343,6 @@ namespace SistemaWeb_UnidadPracticas.Controllers
             // Devolver el PDF como una descarga al usuario
             return File(pdf, "application/pdf", "Bitácora_" + DateTime.Now.ToString() + ".pdf");
         }
+        #endregion
     }
 }

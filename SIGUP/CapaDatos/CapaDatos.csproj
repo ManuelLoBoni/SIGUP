@@ -76,7 +76,6 @@
     <Compile Include="BD_CategoriaHerramienta.cs" />
     <Compile Include="BD_Conexion.cs" />
     <Compile Include="BD_ControlAccesos.cs" />
-    <Compile Include="BD_ControlUsuario.cs" />
     <Compile Include="BD_DetallePrestamo.cs" />
     <Compile Include="BD_Edificio.cs" />
     <Compile Include="BD_Herramienta.cs" />

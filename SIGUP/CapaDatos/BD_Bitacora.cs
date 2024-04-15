@@ -23,7 +23,7 @@ namespace CapaDatos
                     StringBuilder sb = new StringBuilder();
 
                     sb.AppendLine("select IdPractica, CONVERT(char(10), CU.fecha, 103)Fecha,CU.IdUsuario, CONCAT(US.Nombre,' ',US.Apellidos)Usuario,Bitacora.NombreActividad, CU.CantidadAlumnos, CA.NombreCarrera,Semestre,CU.IdRegistro, Observaciones from Bitacora");
-                    sb.AppendLine("inner join ControlUsuario CU on Bitacora.IdRegistro = CU.IdRegistro");
+                    sb.AppendLine("inner join ControlAccesos CU on Bitacora.IdRegistro = CU.IdRegistro");
                     sb.AppendLine("inner join Carreras CA ON CA.IdCarrera = CU.IdCarrera");
                     sb.AppendLine("inner join usuario US ON CU.IdUsuario = US.IdUsuario");
                     sb.AppendLine("inner join TipoActividad TA ON TA.IdActividad = 1 order by Bitacora.IdPractica DESC");
@@ -75,9 +75,14 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand("sp_RegistrarBitacora", oConexion);
                     cmd.Parameters.AddWithValue("@NombreActividad", registroBit.NombreActividad);
                     cmd.Parameters.AddWithValue("@IdRegistro", registroBit.E_ControlAccesos.IdRegistro);
-                    cmd.Parameters.AddWithValue("@Observaciones", registroBit.Observaciones);
-
-
+                    if (registroBit.Observaciones == null)
+                    {
+                        cmd.Parameters.AddWithValue("@Observaciones", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Observaciones", registroBit.Observaciones);
+                    }
                     //Dos parametros de salida, un entero de resultaado y un string de mensaje
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;

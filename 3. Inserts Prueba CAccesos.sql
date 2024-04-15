@@ -54,7 +54,7 @@ INSERT INTO TipoActividad (NombreActividad)
 VALUES	('Práctica'),
 		('Clase')
 
-INSERT INTO ControlUsuario (IdUsuario, TipoActividad, CantidadAlumnos, Semestre, IdCarrera,Area)
+INSERT INTO ControlAccesos(IdUsuario, TipoActividad, CantidadAlumnos, Semestre, IdCarrera,Area)
 VALUES	('456', 1, 15, 3, 5,2),
 		('789', 1, 20, 5, 6,2), 
 		('234', 1, 18, 7, 7,1),

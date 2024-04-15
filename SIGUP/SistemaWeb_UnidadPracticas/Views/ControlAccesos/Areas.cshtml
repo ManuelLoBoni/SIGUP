@@ -97,7 +97,7 @@
             responsive: true,/*Para que sea resposiva*/
             ordering: true,
             "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
-                url: '@Url.Action("ListarAreaCCU", "ControlAccesos")',
+                url: '@Url.Action("ListarAreaCA", "ControlAccesos")',
                 type: "GET",
                 dataType: "json"
             },
@@ -190,7 +190,7 @@
             function (isConfirm) {
             if (isConfirm) {
                 jQuery.ajax({
-                url: '@Url.Action("EliminarAreasCU", "ControlAccesos")',
+                url: '@Url.Action("EliminarAreasCA", "ControlAccesos")',
                 type: "POST",
                     data: JSON.stringify({ id: json.idArea }),
                 dataType: "json",
@@ -226,7 +226,7 @@
                 },
             }
                 jQuery.ajax({
-                url: '@Url.Action("GuardarAreasCU", "ControlAccesos")',
+                url: '@Url.Action("GuardarAreasCA", "ControlAccesos")',
                     type: "POST",
                     data: JSON.stringify({ area: Registro }), // el accesos es el parametro del metodo del controlador, el otro es la variable
                 dataType: "json",

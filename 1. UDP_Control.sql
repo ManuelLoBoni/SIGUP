@@ -107,7 +107,7 @@ NombreActividad varchar(100) not null
 )
 GO
 
-Create Table ControlUsuario(
+Create Table ControlAccesos(
 IdRegistro int identity(1,1) primary key not null,
 fecha date default CONVERT(DATE, GETDATE()),
 IdUsuario varchar(50) constraint FK_usuarioCU foreign key (IdUsuario) references usuario(IdUsuario) not null,
@@ -117,7 +117,7 @@ TipoActividad int constraint FK_TipoActividad foreign key (TipoActividad) refere
 CantidadAlumnos int not null,
 Semestre int not null,
 IdCarrera int constraint FK_Carreras foreign key (IdCarrera) references Carreras(IdCarrera) not null,
-Area int constraint FK_AreaCU foreign key (Area) references Areas(IdArea) not null
+Area int constraint FK_AreaCA foreign key (Area) references Areas(IdArea) not null
 );
 Go
 
@@ -125,7 +125,7 @@ Create Table Bitacora
 (
 IdPractica int identity(1,1) primary key not null,
 NombreActividad varchar(100) not null,  
-IdRegistro int constraint FK_ControlUsuario foreign key (IdRegistro) references ControlUsuario(IdRegistro) not null,
+IdRegistro int constraint FK_ControlAccesos foreign key (IdRegistro) references ControlAccesos(IdRegistro) not null,
 Observaciones varchar(150)
 );
 Go

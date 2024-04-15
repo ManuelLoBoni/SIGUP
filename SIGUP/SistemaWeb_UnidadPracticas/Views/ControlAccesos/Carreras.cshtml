@@ -90,7 +90,7 @@
             responsive: true,/*Para que sea resposiva*/
             ordering: true,
             "ajax": {/*Como pinta la tabla, ajax solo trae todos los valores*/
-                url: '@Url.Action("ListarCarrerasCU", "ControlAccesos")',
+                url: '@Url.Action("ListarCarrerasCA", "ControlAccesos")',
                 type: "GET",
                 dataType: "json"
             },
@@ -158,7 +158,7 @@
                 },
                 function () {
                     jQuery.ajax({
-                        url: '@Url.Action("EliminarCarreraCU", "ControlAccesos")',
+                        url: '@Url.Action("EliminarCarreraCA", "ControlAccesos")',
                         type: "POST",
                         data: JSON.stringify({ id: json.idCarrera }),
                         dataType: "json",
@@ -184,7 +184,7 @@
                     nombreCarrera: $("#txtNombreCarrera").val(),
                 }
             jQuery.ajax({
-                url: '@Url.Action("GuardarCarreraCU", "ControlAccesos")',
+                url: '@Url.Action("GuardarCarreraCA", "ControlAccesos")',
                 type: "POST",
                 data: JSON.stringify({ carrera: Carrera }),
                 dataType: "json",

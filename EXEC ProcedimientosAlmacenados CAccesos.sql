@@ -24,13 +24,13 @@ EXEC sp_EditarCarreras 9,'Edit','',1
 EXEC sp_EliminarCarreras 9,'',1
 
 -- idusr, fecha, horaen, horasal, actividad, cantalum, semestre, idcarrera, area, resultado
-EXEC sp_RegistrarCU '456','','08:00:00','',1,30,7,3,1,1
+EXEC sp_RegistrarCA '456','','08:00:00','',1,30,7,3,1,1
 -- id, fecha, idusr, horaen,horasal, actividad, cantalum, semestre, idcarrera, area, mensaje, resultado
-EXEC sp_EditarCU 11,'','234','09:00:00','14:00:00',1,30,7,1,1,'',1
+EXEC sp_EditarCA 11,'','234','09:00:00','14:00:00',1,30,7,1,1,'',1
 -- id, mensaje, resultado
-EXEC sp_EliminarCU 11,'',1
+EXEC sp_EliminarCA 11,'',1
 -- id, hsalida, mensaje, resultado
-EXEC sp_SalidaCU 4,'14:00','',1
+EXEC sp_SalidaCA 4,'14:00','',1
 
 -- NamActiv, idcu, observaciones, resultado
 EXEC sp_RegistrarBitacora 'Deslechado',1,'Faltaron tazones',1

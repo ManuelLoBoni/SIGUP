@@ -121,7 +121,7 @@ AS
 BEGIN
 	SET @Resultado = 0
 	IF NOT EXISTS (SELECT * FROM Areas A
-        INNER JOIN ControlUsuario CU ON A.IdArea = CU.Area
+        INNER JOIN ControlAccesos CU ON A.IdArea = CU.Area
         INNER JOIN prestamo P ON A.IdArea = P.Area
         WHERE A.IdArea = @IdArea)
 	BEGIN
@@ -186,7 +186,7 @@ CREATE PROCEDURE sp_EliminarCarreras
 AS
 BEGIN
 	SET @Resultado = 0
-	IF NOT EXISTS (SELECT * FROM Carreras C INNER JOIN ControlUsuario CE 
+	IF NOT EXISTS (SELECT * FROM Carreras C INNER JOIN ControlAccesos CE 
 	ON C.IdCarrera = CE.IdCarrera WHERE C.IdCarrera = @IdCarrera)
 	BEGIN
 		DELETE FROM Carreras WHERE IdCarrera = @IdCarrera
@@ -197,8 +197,8 @@ BEGIN
 END
 GO
 
-----------------------------------------------SP - ControlUsuario----------------------------------------------
-CREATE PROCEDURE sp_RegistrarCU
+----------------------------------------------SP - ControlAccesos----------------------------------------------
+CREATE PROCEDURE sp_RegistrarCA
 (
     @IdUsuario varchar(50),
 	@fecha date,
@@ -217,14 +217,14 @@ BEGIN
 
 	SET @Resultado = 0
 	BEGIN
-		INSERT INTO ControlUsuario (IdUsuario,fecha, HoraEntrada,HoraSalida, TipoActividad, CantidadAlumnos, Semestre, IdCarrera, Area)
+		INSERT INTO ControlAccesos (IdUsuario,fecha, HoraEntrada,HoraSalida, TipoActividad, CantidadAlumnos, Semestre, IdCarrera, Area)
 		VALUES (@IdUsuario,@fecha, @HoraEntrada,@HoraSalida, @TipoActividad, @CantidadAlumnos, @Semestre, @IdCarrera, @Area)
         SET @Resultado = scope_identity()
 	END
 END
 GO
 
-CREATE PROCEDURE sp_EditarCU
+CREATE PROCEDURE sp_EditarCA
 (
 	@IdRegistro int,
     @fecha date,
@@ -242,9 +242,9 @@ CREATE PROCEDURE sp_EditarCU
 AS
 BEGIN
 	SET @Resultado = 0
-	IF EXISTS (SELECT * FROM ControlUsuario WHERE IdRegistro = @IdRegistro)
+	IF EXISTS (SELECT * FROM ControlAccesos WHERE IdRegistro = @IdRegistro)
     BEGIN
-        UPDATE ControlUsuario
+        UPDATE ControlAccesos
         SET
             fecha = @fecha,
             IdUsuario = @IdUsuario,
@@ -263,7 +263,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE sp_SalidaCU
+CREATE PROCEDURE sp_SalidaCA
 (
 	@IdRegistro int,
     @HoraSalida time,
@@ -273,9 +273,9 @@ CREATE PROCEDURE sp_SalidaCU
 AS
 BEGIN
 	SET @Resultado = 0
-	IF EXISTS (SELECT * FROM ControlUsuario WHERE IdRegistro = @IdRegistro)
+	IF EXISTS (SELECT * FROM ControlAccesos WHERE IdRegistro = @IdRegistro)
     BEGIN
-        UPDATE ControlUsuario
+        UPDATE ControlAccesos
         SET
             HoraSalida = @HoraSalida
         WHERE IdRegistro = @IdRegistro;
@@ -286,7 +286,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE sp_EliminarCU
+CREATE PROCEDURE sp_EliminarCA
 (
 	@IdRegistro int,
 	@Mensaje varchar(500) output,
@@ -295,10 +295,10 @@ CREATE PROCEDURE sp_EliminarCU
 AS
 BEGIN
 	SET @Resultado = 0
-	IF NOT EXISTS (SELECT * FROM ControlUsuario CU INNER JOIN Bitacora B 
+	IF NOT EXISTS (SELECT * FROM ControlAccesos CU INNER JOIN Bitacora B 
 	ON CU.IdRegistro = B.IdRegistro WHERE CU.IdRegistro = @IdRegistro)
 	BEGIN
-		DELETE FROM ControlUsuario WHERE IdRegistro = @IdRegistro
+		DELETE FROM ControlAccesos WHERE IdRegistro = @IdRegistro
 		SET @Resultado = 1
 	END
 	ELSE
@@ -423,7 +423,7 @@ CREATE PROCEDURE sp_EliminarActividad
 AS
 BEGIN
 	SET @Resultado = 0
-	IF NOT EXISTS (SELECT * FROM TipoActividad TA INNER JOIN ControlUsuario CE 
+	IF NOT EXISTS (SELECT * FROM TipoActividad TA INNER JOIN ControlAccesos CE 
 	ON TA.IdActividad = CE.TipoActividad WHERE CE.TipoActividad = @IdActividad)
 	BEGIN
 		DELETE FROM TipoActividad WHERE IdActividad = @IdActividad
